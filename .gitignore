@@ -1,0 +1,7 @@
+*.exe
+*.macrocall
+.cache
+.svn
+.vs
+.vscode
+target

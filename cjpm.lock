@@ -1,0 +1,6 @@
+version = 0
+
+[requires]
+  cenum = {commitId = "ac2f1f09c22e6a553533710c88af227587bdc59d", git = "https://github.com/causerp/cenum.git", tag = "v1.0.0"}
+  ctemplate = {commitId = "9721d4bae838b58deae0ab41cf844952c85d197d", git = "https://github.com/causerp/ctemplate.git", tag = "v1.0.0"}
+  endian = {commitId = "07cc90bd499981345d97cb4db7f24c0d264af8f3", git = "https://github.com/causerp/endian.git", tag = "v1.0.0"}
