@@ -207,10 +207,6 @@ public class Image <: ResourceHandle & Equatable<Image> {
         unsafe { sfImage_setPixel(m_handle, x, y, color) }
     }
 
-    public func setPixel(x: Int32, y: Int32, color: Color): Unit {
-        unsafe { sfImage_setPixel(m_handle, UInt32(x), UInt32(y), color) }
-    }
-
     public prop pixelsPtr: CPointer<UInt8> {
         get() {
             unsafe { sfImage_getPixelsPtr(m_handle) }

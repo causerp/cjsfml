@@ -427,15 +427,16 @@ public class RenderWindow <: RenderTarget & SFMLWindow & Equatable<RenderWindow>
 
     // RenderWindow
 
-    public func getPosition(): Vector2i {
-        unsafe { sfMouse_getPositionRenderWindow(m_handle) }
+    public mut prop mousePosition: Vector2i {
+        get() {
+            unsafe { sfMouse_getPositionRenderWindow(m_handle) }
+        }
+        set(value) {
+            unsafe { sfMouse_setPositionRenderWindow(value, m_handle) }
+        }
     }
 
-    public func setPosition(position: Vector2i): Unit {
-        unsafe { sfMouse_setPositionRenderWindow(position, m_handle) }
-    }
-
-    public func getPosition(finger: UInt32): Vector2i {
+    public func getTouchPosition(finger: UInt32): Vector2i {
         unsafe { sfTouch_getPositionRenderWindow(finger, m_handle) }
     }
 }

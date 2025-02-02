@@ -279,17 +279,18 @@ public class Window <: SFMLWindow & Equatable<Window> {
 
     // Mouse
 
-    public func getPosition(): Vector2i {
-        unsafe { sfMouse_getPosition(m_handle) }
-    }
-
-    public func setPosition(position: Vector2i): Unit {
-        unsafe { sfMouse_setPosition(position, m_handle) }
+    public mut prop mousePosition: Vector2i {
+        get() {
+            unsafe { sfMouse_getPosition(m_handle) }
+        }
+        set(value) {
+            unsafe { sfMouse_setPosition(value, m_handle) }
+        }
     }
 
     // Touch
 
-    public func getPosition(finger: UInt32): Vector2i {
+    public func getTouchPosition(finger: UInt32): Vector2i {
         unsafe { sfTouch_getPosition(finger, m_handle) }
     }
 }
