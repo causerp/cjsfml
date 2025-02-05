@@ -13,9 +13,9 @@ foreign {
 
     // Music
 
-    func sfMusic_setLoop(handle: CPointer<Unit>, loop: Bool): Unit
+    func sfMusic_setLoop(handle: CPointer<Unit>, loop: SfBool): Unit
 
-    func sfMusic_getLoop(handle: CPointer<Unit>): Bool
+    func sfMusic_getLoop(handle: CPointer<Unit>): SfBool
 
     func sfMusic_getDuration(handle: CPointer<Unit>): Time
 
@@ -43,7 +43,7 @@ foreign {
 
     func sfMusic_setPosition(handle: CPointer<Unit>, position: Vector3f): Unit
 
-    func sfMusic_setRelativeToListener(handle: CPointer<Unit>, relative: Bool): Unit
+    func sfMusic_setRelativeToListener(handle: CPointer<Unit>, relative: SfBool): Unit
 
     func sfMusic_setMinDistance(handle: CPointer<Unit>, distance: Float32): Unit
 
@@ -57,7 +57,7 @@ foreign {
 
     func sfMusic_getPosition(handle: CPointer<Unit>): Vector3f
 
-    func sfMusic_isRelativeToListener(handle: CPointer<Unit>): Bool
+    func sfMusic_isRelativeToListener(handle: CPointer<Unit>): SfBool
 
     func sfMusic_getMinDistance(handle: CPointer<Unit>): Float32
 
@@ -151,10 +151,10 @@ public class Music <: ResourceHandle & Equatable<Music> {
 
     public mut prop loop: Bool {
         get() {
-            unsafe { sfMusic_getLoop(m_handle) }
+            unsafe { sfMusic_getLoop(m_handle).toBool() }
         }
         set(value) {
-            unsafe { sfMusic_setLoop(m_handle, value) }
+            unsafe { sfMusic_setLoop(m_handle, SfBool.fromBool(value)) }
         }
     }
 
@@ -232,10 +232,10 @@ public class Music <: ResourceHandle & Equatable<Music> {
 
     public mut prop relativeToListener: Bool {
         get() {
-            unsafe { sfMusic_isRelativeToListener(m_handle) }
+            unsafe { sfMusic_isRelativeToListener(m_handle).toBool() }
         }
         set(value) {
-            unsafe { sfMusic_setRelativeToListener(m_handle, value) }
+            unsafe { sfMusic_setRelativeToListener(m_handle, SfBool.fromBool(value)) }
         }
     }
 

@@ -14,9 +14,9 @@ foreign {
 
     func sfVertexBuffer_getVertexCount(handle: CPointer<Unit>): UInt32
 
-    func sfVertexBuffer_update(handle: CPointer<Unit>, vertices: CPointer<Vertex>, vertexCount: UInt32, offset: UInt32): Bool
+    func sfVertexBuffer_update(handle: CPointer<Unit>, vertices: CPointer<Vertex>, vertexCount: UInt32, offset: UInt32): SfBool
 
-    func sfVertexBuffer_updateFromVertexBuffer(handle: CPointer<Unit>, other: CPointer<Unit>): Bool
+    func sfVertexBuffer_updateFromVertexBuffer(handle: CPointer<Unit>, other: CPointer<Unit>): SfBool
 
     func sfVertexBuffer_swap(left: CPointer<Unit>, right: CPointer<Unit>): Unit
 
@@ -32,7 +32,7 @@ foreign {
 
     func sfVertexBuffer_bind(handle: CPointer<Unit>): Unit
 
-    func sfVertexBuffer_isAvailable(): Bool
+    func sfVertexBuffer_isAvailable(): SfBool
 }
 
 @CEnum[public VertexBufferUsage](
@@ -125,7 +125,7 @@ public class VertexBuffer <: ResourceHandle & RenderTargetDrawable & Equatable<V
         unsafe {
             let rawData = acquireArrayRawData(vertices)
             try {
-                success = sfVertexBuffer_update(m_handle, rawData.pointer, UInt32(vertices.size), offset)
+                success = sfVertexBuffer_update(m_handle, rawData.pointer, UInt32(vertices.size), offset).toBool()
             } finally {
                 releaseArrayRawData(rawData)
             }
@@ -171,7 +171,7 @@ public class VertexBuffer <: ResourceHandle & RenderTargetDrawable & Equatable<V
 
     public static prop isAvailable: Bool {
         get() {
-            unsafe { sfVertexBuffer_isAvailable() }
+            unsafe { sfVertexBuffer_isAvailable().toBool() }
         }
     }
 }

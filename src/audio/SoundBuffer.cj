@@ -18,7 +18,7 @@ foreign {
 
     // SoundBuffer
 
-    func sfSoundBuffer_saveToFile(handle: CPointer<Unit>, filename: CString): Bool
+    func sfSoundBuffer_saveToFile(handle: CPointer<Unit>, filename: CString): SfBool
 
     func sfSoundBuffer_getSamples(handle: CPointer<Unit>): CPointer<Int16>
 
@@ -130,7 +130,7 @@ public class SoundBuffer <: ResourceHandle & Equatable<SoundBuffer> {
     public func savetoFile(filename: String): Bool {
         unsafe {
             try (filenameRes = LibC.mallocCString(filename).asResource()) {
-                return sfSoundBuffer_saveToFile(m_handle, filenameRes.value)
+                return sfSoundBuffer_saveToFile(m_handle, filenameRes.value).toBool()
             }
         }
         return false

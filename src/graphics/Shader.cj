@@ -35,13 +35,13 @@ foreign {
 
     func sfShader_setIntColorUniform(handle: CPointer<Unit>, name: CString, color: Color): Unit
 
-    func sfShader_setBoolUniform(handle: CPointer<Unit>, name: CString, x: Bool): Unit
+    func sfShader_setBoolUniform(handle: CPointer<Unit>, name: CString, x: SfBool): Unit
 
-    func sfShader_setBvec2Uniform(handle: CPointer<Unit>, name: CString, vector: GlslBvec2): Unit
+    func sfShader_setBvec2Uniform(handle: CPointer<Unit>, name: CString, vector: GlslIvec2): Unit
 
-    func sfShader_setBvec3Uniform(handle: CPointer<Unit>, name: CString, vector: GlslBvec3): Unit
+    func sfShader_setBvec3Uniform(handle: CPointer<Unit>, name: CString, vector: GlslIvec3): Unit
 
-    func sfShader_setBvec4Uniform(handle: CPointer<Unit>, name: CString, vector: GlslBvec4): Unit
+    func sfShader_setBvec4Uniform(handle: CPointer<Unit>, name: CString, vector: GlslIvec4): Unit
 
     func sfShader_setMat3Uniform(handle: CPointer<Unit>, name: CString, matrix: GlslMat3): Unit
 
@@ -73,9 +73,9 @@ foreign {
 
     func sfShader_bind(handle: CPointer<Unit>): Unit
 
-    func sfShader_isAvailable(): Bool
+    func sfShader_isAvailable(): SfBool
 
-    func sfShader_isGeometryAvailable(): Bool
+    func sfShader_isGeometryAvailable(): SfBool
 }
 
 public class Shader <: ResourceHandle & Equatable<Shader> {
@@ -313,7 +313,7 @@ public class Shader <: ResourceHandle & Equatable<Shader> {
     public func setUniform(name: String, x: Bool): Unit {
         unsafe {
             try (nameRes = LibC.mallocCString(name).asResource()) {
-                sfShader_setBoolUniform(m_handle, nameRes.value, x)
+                sfShader_setBoolUniform(m_handle, nameRes.value, SfBool.fromBool(x))
             }
         }
     }
@@ -321,7 +321,14 @@ public class Shader <: ResourceHandle & Equatable<Shader> {
     public func setUniform(name: String, vector: GlslBvec2): Unit {
         unsafe {
             try (nameRes = LibC.mallocCString(name).asResource()) {
-                sfShader_setBvec2Uniform(m_handle, nameRes.value, vector)
+                sfShader_setBvec2Uniform(
+                    m_handle,
+                    nameRes.value,
+                    GlslIvec2(
+                        SfBool.fromBool(vector.x),
+                        SfBool.fromBool(vector.y)
+                    )
+                )
             }
         }
     }
@@ -329,7 +336,15 @@ public class Shader <: ResourceHandle & Equatable<Shader> {
     public func setUniform(name: String, vector: GlslBvec3): Unit {
         unsafe {
             try (nameRes = LibC.mallocCString(name).asResource()) {
-                sfShader_setBvec3Uniform(m_handle, nameRes.value, vector)
+                sfShader_setBvec3Uniform(
+                    m_handle,
+                    nameRes.value,
+                    GlslIvec3(
+                        SfBool.fromBool(vector.x),
+                        SfBool.fromBool(vector.y),
+                        SfBool.fromBool(vector.z)
+                    )
+                )
             }
         }
     }
@@ -337,7 +352,16 @@ public class Shader <: ResourceHandle & Equatable<Shader> {
     public func setUniform(name: String, vector: GlslBvec4): Unit {
         unsafe {
             try (nameRes = LibC.mallocCString(name).asResource()) {
-                sfShader_setBvec4Uniform(m_handle, nameRes.value, vector)
+                sfShader_setBvec4Uniform(
+                    m_handle,
+                    nameRes.value,
+                    GlslIvec4(
+                        SfBool.fromBool(vector.x),
+                        SfBool.fromBool(vector.y),
+                        SfBool.fromBool(vector.z),
+                        SfBool.fromBool(vector.w)
+                    )
+                )
             }
         }
     }
@@ -452,13 +476,13 @@ public class Shader <: ResourceHandle & Equatable<Shader> {
 
     public static prop isAvailable: Bool {
         get() {
-            unsafe { sfShader_isAvailable() }
+            unsafe { sfShader_isAvailable().toBool() }
         }
     }
 
     public static prop isGeometryAvailable: Bool {
         get() {
-            unsafe { sfShader_isGeometryAvailable() }
+            unsafe { sfShader_isGeometryAvailable().toBool() }
         }
     }
 }

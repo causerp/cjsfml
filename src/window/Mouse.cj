@@ -4,7 +4,7 @@ import cenum.*
 import cjsfml.system.*
 
 foreign {
-    func sfMouse_isButtonPressed(button: MouseButton): Bool
+    func sfMouse_isButtonPressed(button: MouseButton): SfBool
 
     func sfMouse_getPosition(relativeTo: CPointer<Unit>): Vector2i
 
@@ -31,7 +31,7 @@ foreign {
 
 public class Mouse {
     public static func isButtonPressed(button: MouseButton): Bool {
-        unsafe { sfMouse_isButtonPressed(button) }
+        unsafe { sfMouse_isButtonPressed(button).toBool() }
     }
 
     public static func getPosition(): Vector2i {

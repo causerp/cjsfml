@@ -39,7 +39,7 @@ foreign {
 
     // Shape
 
-    func sfRectangleShape_setTexture(handle: CPointer<Unit>, texture: CPointer<Unit>, resetRect: Bool): Unit
+    func sfRectangleShape_setTexture(handle: CPointer<Unit>, texture: CPointer<Unit>, resetRect: SfBool): Unit
 
     func sfRectangleShape_setTextureRect(handle: CPointer<Unit>, rect: IntRect): Unit
 
@@ -227,7 +227,7 @@ public class RectangleShape <: ResourceHandle & RenderTargetDrawable & Transform
     }
 
     public func setTexture(texture: ?Texture, resetRect!: Bool = false): Unit {
-        unsafe { sfRectangleShape_setTexture(m_handle, texture?.handle ?? CPointer(), resetRect) }
+        unsafe { sfRectangleShape_setTexture(m_handle, texture?.handle ?? CPointer(), SfBool.fromBool(resetRect)) }
     }
 
     public mut prop textureRect: IntRect {

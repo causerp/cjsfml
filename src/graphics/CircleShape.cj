@@ -39,7 +39,7 @@ foreign {
 
     // Shape
 
-    func sfCircleShape_setTexture(handle: CPointer<Unit>, texture: CPointer<Unit>, resetRect: Bool): Unit
+    func sfCircleShape_setTexture(handle: CPointer<Unit>, texture: CPointer<Unit>, resetRect: SfBool): Unit
 
     func sfCircleShape_setTextureRect(handle: CPointer<Unit>, rect: IntRect): Unit
 
@@ -232,7 +232,7 @@ public class CircleShape <: ResourceHandle & RenderTargetDrawable & Transformabl
     }
 
     public func setTexture(texture: ?Texture, resetRect!: Bool = false): Unit {
-        unsafe { sfCircleShape_setTexture(m_handle, texture?.handle ?? CPointer(), resetRect) }
+        unsafe { sfCircleShape_setTexture(m_handle, texture?.handle ?? CPointer(), SfBool.fromBool(resetRect)) }
     }
 
     public mut prop textureRect: IntRect {

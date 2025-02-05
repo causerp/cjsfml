@@ -15,9 +15,9 @@ foreign {
 
     func sfSound_getBuffer(handle: CPointer<Unit>): CPointer<Unit>
 
-    func sfSound_setLoop(handle: CPointer<Unit>, loop: Bool): Unit
+    func sfSound_setLoop(handle: CPointer<Unit>, loop: SfBool): Unit
 
-    func sfSound_getLoop(handle: CPointer<Unit>): Bool
+    func sfSound_getLoop(handle: CPointer<Unit>): SfBool
 
     func sfSound_play(handle: CPointer<Unit>): Unit
 
@@ -35,7 +35,7 @@ foreign {
 
     func sfSound_setPosition(handle: CPointer<Unit>, position: Vector3f): Unit
 
-    func sfSound_setRelativeToListener(handle: CPointer<Unit>, relative: Bool): Unit
+    func sfSound_setRelativeToListener(handle: CPointer<Unit>, relative: SfBool): Unit
 
     func sfSound_setMinDistance(handle: CPointer<Unit>, distance: Float32): Unit
 
@@ -49,7 +49,7 @@ foreign {
 
     func sfSound_getPosition(handle: CPointer<Unit>): Vector3f
 
-    func sfSound_isRelativeToListener(handle: CPointer<Unit>): Bool
+    func sfSound_isRelativeToListener(handle: CPointer<Unit>): SfBool
 
     func sfSound_getMinDistance(handle: CPointer<Unit>): Float32
 
@@ -139,10 +139,10 @@ public class Sound <: ResourceHandle & Equatable<Sound> {
 
     public mut prop loop: Bool {
         get() {
-            unsafe { sfSound_getLoop(m_handle) }
+            unsafe { sfSound_getLoop(m_handle).toBool() }
         }
         set(value) {
-            unsafe { sfSound_setLoop(m_handle, value) }
+            unsafe { sfSound_setLoop(m_handle, SfBool.fromBool(value)) }
         }
     }
 
@@ -193,10 +193,10 @@ public class Sound <: ResourceHandle & Equatable<Sound> {
 
     public mut prop relativeToListener: Bool {
         get() {
-            unsafe { sfSound_isRelativeToListener(m_handle) }
+            unsafe { sfSound_isRelativeToListener(m_handle).toBool() }
         }
         set(value) {
-            unsafe { sfSound_setRelativeToListener(m_handle, value) }
+            unsafe { sfSound_setRelativeToListener(m_handle, SfBool.fromBool(value)) }
         }
     }
 

@@ -15,11 +15,11 @@ foreign {
 
     func sfRenderWindow_close(handle: CPointer<Unit>): Unit
 
-    func sfRenderWindow_isOpen(handle: CPointer<Unit>): Bool
+    func sfRenderWindow_isOpen(handle: CPointer<Unit>): SfBool
 
-    func sfRenderWindow_pollEvent(handle: CPointer<Unit>, event: CPointer<Byte>): Bool
+    func sfRenderWindow_pollEvent(handle: CPointer<Unit>, event: CPointer<Byte>): SfBool
 
-    func sfRenderWindow_waitEvent(handle: CPointer<Unit>, event: CPointer<Byte>): Bool
+    func sfRenderWindow_waitEvent(handle: CPointer<Unit>, event: CPointer<Byte>): SfBool
 
     func sfRenderWindow_getPosition(handle: CPointer<Unit>): Vector2i
 
@@ -33,21 +33,21 @@ foreign {
 
     func sfRenderWindow_setIcon(handle: CPointer<Unit>, width: UInt32, height: UInt32, pixels: CPointer<UInt8>): Unit
 
-    func sfRenderWindow_setVisible(handle: CPointer<Unit>, visible: Bool): Unit
+    func sfRenderWindow_setVisible(handle: CPointer<Unit>, visible: SfBool): Unit
 
-    func sfRenderWindow_setMouseCursorVisible(handle: CPointer<Unit>, visible: Bool): Unit
+    func sfRenderWindow_setMouseCursorVisible(handle: CPointer<Unit>, visible: SfBool): Unit
 
-    func sfRenderWindow_setMouseCursorGrabbed(handle: CPointer<Unit>, grabbed: Bool): Unit
+    func sfRenderWindow_setMouseCursorGrabbed(handle: CPointer<Unit>, grabbed: SfBool): Unit
 
     func sfRenderWindow_setMouseCursor(handle: CPointer<Unit>, cursor: CPointer<Unit>): Unit
 
-    func sfRenderWindow_setKeyRepeatEnabled(handle: CPointer<Unit>, enabled: Bool): Unit
+    func sfRenderWindow_setKeyRepeatEnabled(handle: CPointer<Unit>, enabled: SfBool): Unit
 
     func sfRenderWindow_setJoystickThreshold(handle: CPointer<Unit>, threshold: Float32): Unit
 
     func sfRenderWindow_requestFocus(handle: CPointer<Unit>): Unit
 
-    func sfRenderWindow_hasFocus(handle: CPointer<Unit>): Bool
+    func sfRenderWindow_hasFocus(handle: CPointer<Unit>): SfBool
 
     func sfRenderWindow_getSystemHandle(handle: CPointer<Unit>): CPointer<Unit>
 
@@ -55,11 +55,11 @@ foreign {
 
     func sfRenderWindow_getSettings(handle: CPointer<Unit>): ContextSettings
 
-    func sfRenderWindow_setVerticalSyncEnabled(handle: CPointer<Unit>, enabled: Bool): Unit
+    func sfRenderWindow_setVerticalSyncEnabled(handle: CPointer<Unit>, enabled: SfBool): Unit
 
     func sfRenderWindow_setFramerateLimit(handle: CPointer<Unit>, limit: UInt32): Unit
 
-    func sfRenderWindow_setActive(handle: CPointer<Unit>, active: Bool): Bool
+    func sfRenderWindow_setActive(handle: CPointer<Unit>, active: SfBool): SfBool
 
     func sfRenderWindow_display(handle: CPointer<Unit>): Unit
 
@@ -107,7 +107,7 @@ foreign {
     func sfRenderWindow_drawPrimitives(handle: CPointer<Unit>, vertices: CPointer<Vertex>, vertexCount: UIntNative,
         primitiveType: PrimitiveType, states: CPointer<RenderStates>): Unit
 
-    func sfRenderWindow_isSrgb(handle: CPointer<Unit>): Bool
+    func sfRenderWindow_isSrgb(handle: CPointer<Unit>): SfBool
 
     func sfRenderWindow_pushGLStates(handle: CPointer<Unit>): Unit
 
@@ -199,7 +199,7 @@ public class RenderWindow <: RenderTarget & SFMLWindow & Equatable<RenderWindow>
 
     public prop isOpen: Bool {
         get() {
-            unsafe { sfRenderWindow_isOpen(m_handle) }
+            unsafe { sfRenderWindow_isOpen(m_handle).toBool() }
         }
     }
 
@@ -208,7 +208,7 @@ public class RenderWindow <: RenderTarget & SFMLWindow & Equatable<RenderWindow>
         unsafe {
             let rawData = acquireArrayRawData(data)
             try {
-                if (sfRenderWindow_pollEvent(m_handle, rawData.pointer)) {
+                if (sfRenderWindow_pollEvent(m_handle, rawData.pointer).toBool()) {
                     return Event.create(data)
                 }
             } finally {
@@ -223,7 +223,7 @@ public class RenderWindow <: RenderTarget & SFMLWindow & Equatable<RenderWindow>
         unsafe {
             let rawData = acquireArrayRawData(data)
             try {
-                if (sfRenderWindow_waitEvent(m_handle, rawData.pointer)) {
+                if (sfRenderWindow_waitEvent(m_handle, rawData.pointer).toBool()) {
                     return Event.create(data)
                 }
             } finally {
@@ -277,15 +277,15 @@ public class RenderWindow <: RenderTarget & SFMLWindow & Equatable<RenderWindow>
     }
 
     public func setVisible(visible: Bool): Unit {
-        unsafe { sfRenderWindow_setVisible(m_handle, visible) }
+        unsafe { sfRenderWindow_setVisible(m_handle, SfBool.fromBool(visible)) }
     }
 
     public func setMouseCursorVisible(visible: Bool): Unit {
-        unsafe { sfRenderWindow_setMouseCursorVisible(m_handle, visible) }
+        unsafe { sfRenderWindow_setMouseCursorVisible(m_handle, SfBool.fromBool(visible)) }
     }
 
     public func setMouseCursorGrabbed(grabbed: Bool): Unit {
-        unsafe { sfRenderWindow_setMouseCursorGrabbed(m_handle, grabbed) }
+        unsafe { sfRenderWindow_setMouseCursorGrabbed(m_handle, SfBool.fromBool(grabbed)) }
     }
 
     public func setMouseCursor(cursor: Cursor): Unit {
@@ -293,7 +293,7 @@ public class RenderWindow <: RenderTarget & SFMLWindow & Equatable<RenderWindow>
     }
 
     public func setKeyRepeatEnabled(enabled: Bool): Unit {
-        unsafe { sfRenderWindow_setKeyRepeatEnabled(m_handle, enabled) }
+        unsafe { sfRenderWindow_setKeyRepeatEnabled(m_handle, SfBool.fromBool(enabled)) }
     }
 
     public func setJoystickThreshold(threshold: Float32): Unit {
@@ -306,7 +306,7 @@ public class RenderWindow <: RenderTarget & SFMLWindow & Equatable<RenderWindow>
 
     public prop hasFocus: Bool {
         get() {
-            unsafe { sfRenderWindow_hasFocus(m_handle) }
+            unsafe { sfRenderWindow_hasFocus(m_handle).toBool() }
         }
     }
 
@@ -325,7 +325,7 @@ public class RenderWindow <: RenderTarget & SFMLWindow & Equatable<RenderWindow>
     }
 
     public func setVerticalSyncEnabled(enabled: Bool): Unit {
-        unsafe { sfRenderWindow_setVerticalSyncEnabled(m_handle, enabled) }
+        unsafe { sfRenderWindow_setVerticalSyncEnabled(m_handle, SfBool.fromBool(enabled)) }
     }
 
     public func setFramerateLimit(limit: UInt32): Unit {
@@ -333,7 +333,7 @@ public class RenderWindow <: RenderTarget & SFMLWindow & Equatable<RenderWindow>
     }
 
     public func setActive(active: Bool): Bool {
-        unsafe { sfRenderWindow_setActive(m_handle, active) }
+        unsafe { sfRenderWindow_setActive(m_handle, SfBool.fromBool(active)).toBool() }
     }
 
     public func display(): Unit {
@@ -409,7 +409,7 @@ public class RenderWindow <: RenderTarget & SFMLWindow & Equatable<RenderWindow>
 
     public prop isSrgb: Bool {
         get() {
-            unsafe { sfRenderWindow_isSrgb(m_handle) }
+            unsafe { sfRenderWindow_isSrgb(m_handle).toBool() }
         }
     }
 

@@ -1,15 +1,16 @@
 package cjsfml.window
 
 import cenum.*
+import cjsfml.system.*
 
 foreign {
-    func sfJoystick_isConnected(joystick: UInt32): Bool
+    func sfJoystick_isConnected(joystick: UInt32): SfBool
 
     func sfJoystick_getButtonCount(joystick: UInt32): UInt32
 
-    func sfJoystick_hasAxis(joystick: UInt32, axis: JoystickAxis): Bool
+    func sfJoystick_hasAxis(joystick: UInt32, axis: JoystickAxis): SfBool
 
-    func sfJoystick_isButtonPressed(joystick: UInt32, button: UInt32): Bool
+    func sfJoystick_isButtonPressed(joystick: UInt32, button: UInt32): SfBool
 
     func sfJoystick_getAxisPosition(joystick: UInt32, axis: JoystickAxis): Float32
 
@@ -50,7 +51,7 @@ public struct JoystickIdentification {
 
 public class Joystick {
     public static func isConnected(joystick: UInt32): Bool {
-        unsafe { sfJoystick_isConnected(joystick) }
+        unsafe { sfJoystick_isConnected(joystick).toBool() }
     }
 
     public static func getButtonCount(joystick: UInt32): UInt32 {
@@ -58,11 +59,11 @@ public class Joystick {
     }
 
     public static func hasAxis(joystick: UInt32, axis: JoystickAxis): Bool {
-        unsafe { sfJoystick_hasAxis(joystick, axis) }
+        unsafe { sfJoystick_hasAxis(joystick, axis).toBool() }
     }
 
     public static func isButtonPressed(joystick: UInt32, button: UInt32): Bool {
-        unsafe { sfJoystick_isButtonPressed(joystick, button) }
+        unsafe { sfJoystick_isButtonPressed(joystick, button).toBool() }
     }
 
     public static func getAxisPosition(joystick: UInt32, axis: JoystickAxis): Float32 {

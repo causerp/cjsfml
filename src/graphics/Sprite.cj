@@ -39,7 +39,7 @@ foreign {
 
     // Sprite
 
-    func sfSprite_setTexture(handle: CPointer<Unit>, texture: CPointer<Unit>, resetRect: Bool): Unit
+    func sfSprite_setTexture(handle: CPointer<Unit>, texture: CPointer<Unit>, resetRect: SfBool): Unit
 
     func sfSprite_setTextureRect(handle: CPointer<Unit>, rect: IntRect): Unit
 
@@ -71,7 +71,7 @@ public class Sprite <: ResourceHandle & RenderTargetDrawable & Transformable & E
         if (m_handle.isNull()) {
             throw SFMLNullHandleException()
         }
-        unsafe { sfSprite_setTexture(m_handle, texture.handle, true) }
+        unsafe { sfSprite_setTexture(m_handle, texture.handle, 1) }
     }
 
     public init(texture: Texture, rect: IntRect) {
@@ -80,7 +80,7 @@ public class Sprite <: ResourceHandle & RenderTargetDrawable & Transformable & E
             throw SFMLNullHandleException()
         }
         unsafe {
-            sfSprite_setTexture(m_handle, texture.handle, false)
+            sfSprite_setTexture(m_handle, texture.handle, 0)
             sfSprite_setTextureRect(m_handle, rect)
         }
     }
@@ -219,7 +219,7 @@ public class Sprite <: ResourceHandle & RenderTargetDrawable & Transformable & E
     }
 
     public func setTexture(texture: Texture, resetRect!: Bool = false): Unit {
-        unsafe { sfSprite_setTexture(m_handle, texture.handle, resetRect) }
+        unsafe { sfSprite_setTexture(m_handle, texture.handle, SfBool.fromBool(resetRect)) }
     }
 
     public mut prop textureRect: IntRect {

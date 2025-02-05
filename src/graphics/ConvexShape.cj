@@ -39,7 +39,7 @@ foreign {
 
     // Shape
 
-    func sfConvexShape_setTexture(handle: CPointer<Unit>, texture: CPointer<Unit>, resetRect: Bool): Unit
+    func sfConvexShape_setTexture(handle: CPointer<Unit>, texture: CPointer<Unit>, resetRect: SfBool): Unit
 
     func sfConvexShape_setTextureRect(handle: CPointer<Unit>, rect: IntRect): Unit
 
@@ -227,7 +227,7 @@ public class ConvexShape <: ResourceHandle & RenderTargetDrawable & Transformabl
     }
 
     public func setTexture(texture: ?Texture, resetRect!: Bool = false): Unit {
-        unsafe { sfConvexShape_setTexture(m_handle, texture?.handle ?? CPointer(), resetRect) }
+        unsafe { sfConvexShape_setTexture(m_handle, texture?.handle ?? CPointer(), SfBool.fromBool(resetRect)) }
     }
 
     public mut prop textureRect: IntRect {

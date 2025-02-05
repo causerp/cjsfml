@@ -55,9 +55,9 @@ foreign {
 
     func sfRenderTexture_getSize(handle: CPointer<Unit>): Vector2u
 
-    func sfRenderTexture_isSrgb(handle: CPointer<Unit>): Bool
+    func sfRenderTexture_isSrgb(handle: CPointer<Unit>): SfBool
 
-    func sfRenderTexture_setActive(handle: CPointer<Unit>, active: Bool): Bool
+    func sfRenderTexture_setActive(handle: CPointer<Unit>, active: SfBool): SfBool
 
     func sfRenderTexture_pushGLStates(handle: CPointer<Unit>): Unit
 
@@ -73,15 +73,15 @@ foreign {
 
     func sfRenderTexture_getMaximumAntialiasingLevel(): UInt32
 
-    func sfRenderTexture_setSmooth(handle: CPointer<Unit>, smooth: Bool): Unit
+    func sfRenderTexture_setSmooth(handle: CPointer<Unit>, smooth: SfBool): Unit
 
-    func sfRenderTexture_isSmooth(handle: CPointer<Unit>): Bool
+    func sfRenderTexture_isSmooth(handle: CPointer<Unit>): SfBool
 
-    func sfRenderTexture_setRepeated(handle: CPointer<Unit>, repeated: Bool): Unit
+    func sfRenderTexture_setRepeated(handle: CPointer<Unit>, repeated: SfBool): Unit
 
-    func sfRenderTexture_isRepeated(handle: CPointer<Unit>): Bool
+    func sfRenderTexture_isRepeated(handle: CPointer<Unit>): SfBool
 
-    func sfRenderTexture_generateMipmap(handle: CPointer<Unit>): Bool
+    func sfRenderTexture_generateMipmap(handle: CPointer<Unit>): SfBool
 }
 
 public class RenderTexture <: ResourceHandle & RenderTarget & Equatable<RenderTexture> {
@@ -213,12 +213,12 @@ public class RenderTexture <: ResourceHandle & RenderTarget & Equatable<RenderTe
 
     public prop isSrgb: Bool {
         get() {
-            unsafe { sfRenderTexture_isSrgb(m_handle) }
+            unsafe { sfRenderTexture_isSrgb(m_handle).toBool() }
         }
     }
 
     public func setActive(active: Bool): Bool {
-        unsafe { sfRenderWindow_setActive(m_handle, active) }
+        unsafe { sfRenderWindow_setActive(m_handle, SfBool.fromBool(active)).toBool() }
     }
 
     public func pushGLStates(): Unit {
@@ -253,23 +253,23 @@ public class RenderTexture <: ResourceHandle & RenderTarget & Equatable<RenderTe
 
     public mut prop smooth: Bool {
         get() {
-            unsafe { sfRenderTexture_isSmooth(m_handle) }
+            unsafe { sfRenderTexture_isSmooth(m_handle).toBool() }
         }
         set(value) {
-            unsafe { sfRenderTexture_setSmooth(m_handle, value) }
+            unsafe { sfRenderTexture_setSmooth(m_handle, SfBool.fromBool(value)) }
         }
     }
 
     public mut prop repeated: Bool {
         get() {
-            unsafe { sfRenderTexture_isRepeated(m_handle) }
+            unsafe { sfRenderTexture_isRepeated(m_handle).toBool() }
         }
         set(value) {
-            unsafe { sfRenderTexture_setRepeated(m_handle, value) }
+            unsafe { sfRenderTexture_setRepeated(m_handle, SfBool.fromBool(value)) }
         }
     }
 
     public func generateMipmap(): Bool {
-        unsafe { sfRenderTexture_generateMipmap(m_handle) }
+        unsafe { sfRenderTexture_generateMipmap(m_handle).toBool() }
     }
 }

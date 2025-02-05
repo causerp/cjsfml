@@ -42,17 +42,17 @@ foreign {
 
     func sfTexture_updateFromRenderWindow(handle: CPointer<Unit>, renderWindow: CPointer<Unit>, x: UInt32, y: UInt32): Unit
 
-    func sfTexture_setSmooth(handle: CPointer<Unit>, smooth: Bool): Unit
+    func sfTexture_setSmooth(handle: CPointer<Unit>, smooth: SfBool): Unit
 
-    func sfTexture_isSmooth(handle: CPointer<Unit>): Bool
+    func sfTexture_isSmooth(handle: CPointer<Unit>): SfBool
 
-    func sfTexture_isSrgb(handle: CPointer<Unit>): Bool
+    func sfTexture_isSrgb(handle: CPointer<Unit>): SfBool
 
-    func sfTexture_setRepeated(handle: CPointer<Unit>, repeated: Bool): Unit
+    func sfTexture_setRepeated(handle: CPointer<Unit>, repeated: SfBool): Unit
 
-    func sfTexture_isRepeated(handle: CPointer<Unit>): Bool
+    func sfTexture_isRepeated(handle: CPointer<Unit>): SfBool
 
-    func sfTexture_generateMipmap(handle: CPointer<Unit>): Bool
+    func sfTexture_generateMipmap(handle: CPointer<Unit>): SfBool
 
     func sfTexture_swap(handle: CPointer<Unit>, right: CPointer<Unit>): Unit
 
@@ -259,30 +259,30 @@ public class Texture <: ResourceHandle & Equatable<Texture> {
 
     public mut prop smooth: Bool {
         get() {
-            unsafe { sfTexture_isSmooth(m_handle) }
+            unsafe { sfTexture_isSmooth(m_handle).toBool() }
         }
         set(value) {
-            unsafe { sfTexture_setSmooth(m_handle, value) }
+            unsafe { sfTexture_setSmooth(m_handle, SfBool.fromBool(value)) }
         }
     }
 
     public prop isSrgb: Bool {
         get() {
-            unsafe { sfTexture_isSrgb(m_handle) }
+            unsafe { sfTexture_isSrgb(m_handle).toBool() }
         }
     }
 
     public mut prop repeated: Bool {
         get() {
-            unsafe { sfTexture_isRepeated(m_handle) }
+            unsafe { sfTexture_isRepeated(m_handle).toBool() }
         }
         set(value) {
-            unsafe { sfTexture_setRepeated(m_handle, value) }
+            unsafe { sfTexture_setRepeated(m_handle, SfBool.fromBool(value)) }
         }
     }
 
     public func generateMipmap(): Bool {
-        unsafe { sfTexture_generateMipmap(m_handle) }
+        unsafe { sfTexture_generateMipmap(m_handle).toBool() }
     }
 
     public func swap(right: Texture): Unit {

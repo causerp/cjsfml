@@ -19,14 +19,14 @@ foreign {
 
     func sfImage_destroy(handle: CPointer<Unit>): Unit
 
-    func sfImage_saveToFile(handle: CPointer<Unit>, filename: CString): Bool
+    func sfImage_saveToFile(handle: CPointer<Unit>, filename: CString): SfBool
 
     func sfImage_getSize(handle: CPointer<Unit>): Vector2u
 
     func sfImage_createMaskFromColor(handle: CPointer<Unit>, color: Color, alpha: UInt8): Unit
 
     func sfImage_copyImage(handle: CPointer<Unit>, sourceHandle: CPointer<Unit>, destX: UInt32, destY: UInt32,
-        sourceRect: IntRect, applyAlpha: Bool): Unit
+        sourceRect: IntRect, applyAlpha: SfBool): Unit
 
     @FastNative
     func sfImage_setPixel(handle: CPointer<Unit>, x: UInt32, y: UInt32, color: Color): Unit
@@ -178,7 +178,7 @@ public class Image <: ResourceHandle & Equatable<Image> {
     public func saveToFile(filename: String): Bool {
         unsafe {
             try (filenameRes = LibC.mallocCString(filename).asResource()) {
-                return sfImage_saveToFile(m_handle, filenameRes.value)
+                return sfImage_saveToFile(m_handle, filenameRes.value).toBool()
             }
         }
         return false
@@ -196,7 +196,7 @@ public class Image <: ResourceHandle & Equatable<Image> {
 
     public func copy(source: Image, destX: UInt32, destY: UInt32, sourceRect!: IntRect = IntRect(),
         applyAlpha!: Bool = false): Unit {
-        unsafe { sfImage_copyImage(m_handle, source.m_handle, destX, destY, sourceRect, applyAlpha) }
+        unsafe { sfImage_copyImage(m_handle, source.m_handle, destX, destY, sourceRect, SfBool.fromBool(applyAlpha)) }
     }
 
     public func getPixel(x: UInt32, y: UInt32): Color {

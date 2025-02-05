@@ -1,11 +1,13 @@
 package cjsfml.window
 
+import cjsfml.system.*
+
 foreign {
     func sfVideoMode_getDesktopMode(): VideoMode
 
     func sfVideoMode_getFullscreenModes(count: CPointer<UIntNative>): CPointer<VideoMode>
 
-    func sfVideoMode_isValid(mode: VideoMode): Bool
+    func sfVideoMode_isValid(mode: VideoMode): SfBool
 }
 
 @C
@@ -53,6 +55,6 @@ public struct VideoMode {
     }
 
     public static func isValid(mode: VideoMode): Bool {
-        unsafe { sfVideoMode_isValid(mode) }
+        unsafe { sfVideoMode_isValid(mode).toBool() }
     }
 }
