@@ -1,0 +1,96 @@
+name: build
+
+on: [push, pull_request]
+
+env:
+    VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
+
+jobs:
+  build:
+    name: ${{ matrix.preset }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations.
+      # Consider changing this to true when your workflow is stable.
+      fail-fast: false
+
+      # Set up a matrix to run the following configurations:
+      matrix:
+        preset:
+          - linux-release
+          - windows-release
+        os:
+          - ubuntu-latest
+          - windows-latest
+        include:
+          - preset: linux-release
+            os: ubuntu-latest
+            triplet: x64-linux
+            toolchain: /usr/local/share/vcpkg/scripts/buildsystems/vcpkg.cmake
+          - preset: windows-release
+            os: windows-latest
+            triplet: x64-windows
+            toolchain: C:/vcpkg/scripts/buildsystems/vcpkg.cmake
+        exclude:
+          - os: ubuntu-latest
+            preset: windows-release
+          - os: windows-latest
+            preset: linux-release
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install CMake
+      uses: lukka/get-cmake@latest
+      with:
+        cmakeVersion: "3.31.5"
+
+    - name: Enable GitHub Actions cache
+      uses: actions/github-script@v6
+      with:
+        script: |
+          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+
+    - name: Install CSFML dependencies
+      if: runner.os == 'Linux'
+      uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: libx11-dev libxrandr-dev libxcursor-dev libxi-dev libudev-dev libgl1-mesa-dev nasm
+        version: 1.0
+        execute_install_scripts: true
+
+    - name: Setup w64devkit
+      if: runner.os == 'Windows'
+      run: |
+        curl -LO https://github.com/skeeto/w64devkit/releases/download/v2.1.0/w64devkit-x64-2.1.0.exe
+        start /b /wait w64devkit-x64-2.1.0.exe -oC:\ -y
+        echo "C:\w64devkit\bin" >> $GITHUB_ENV
+
+    - name: Verify w64devkit installation
+      if: runner.os == 'Windows'
+      run: |
+        gcc --version
+        g++ --version
+
+    - name: Setup Ninja
+      uses: turtlesec-no/get-ninja@main
+
+    - name: Download CSFML
+      if: runner.os == 'Windows'
+      run: ./csfml/download_csfml.bat
+
+    - name: Download CSFML
+      if: runner.os == 'Linux'
+      run: ./csfml/download_csfml.sh
+
+    - name: Install vcpkg dependencies
+      run: |
+        vcpkg install sfml --triplet=${{ matrix.triplet }}
+      shell: bash
+
+    - name: Build
+      run: |
+        cmake --preset ${{ matrix.preset }} -DCMAKE_TOOLCHAIN_FILE=${{ matrix.toolchain }}
+        cmake --build --preset ${{ matrix.preset }} --target install
