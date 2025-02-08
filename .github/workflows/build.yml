@@ -78,12 +78,8 @@ jobs:
       uses: turtlesec-no/get-ninja@main
 
     - name: Download CSFML
-      if: runner.os == 'Windows'
-      run: ./csfml/download_csfml.bat
-
-    - name: Download CSFML
-      if: runner.os == 'Linux'
-      run: ./csfml/download_csfml.sh
+      shell: bash
+      run: ./download_csfml.sh
 
     - name: Install vcpkg dependencies
       run: |

@@ -1,6 +1,0 @@
-# Ignore everything
-*
-
-!.gitignore
-!CMakePresets.json
-!download_csfml.*
