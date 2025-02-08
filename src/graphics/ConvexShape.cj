@@ -97,7 +97,7 @@ public class ConvexShape <: ResourceHandle & RenderTargetDrawable & Transformabl
     }
 
     ~init() {
-        if (m_handle.isNull() == false) {
+        if (m_handle.isNotNull()) {
             unsafe { sfConvexShape_destroy(m_handle) }
             m_handle = CPointer()
         }

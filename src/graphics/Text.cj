@@ -128,7 +128,7 @@ public class Text <: ResourceHandle & RenderTargetDrawable & Transformable & Equ
     }
 
     ~init() {
-        if (m_handle.isNull() == false) {
+        if (m_handle.isNotNull()) {
             unsafe { sfText_destroy(m_handle) }
             m_handle = CPointer()
         }

@@ -96,7 +96,7 @@ public class RenderTexture <: ResourceHandle & RenderTarget & Equatable<RenderTe
     }
 
     ~init() {
-        if (m_handle.isNull() == false) {
+        if (m_handle.isNotNull()) {
             unsafe { sfRenderTexture_destroy(m_handle) }
             m_handle = CPointer()
         }

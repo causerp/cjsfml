@@ -149,7 +149,7 @@ public class RenderWindow <: RenderTarget & SFMLWindow & Equatable<RenderWindow>
     }
 
     ~init() {
-        if (m_handle.isNull() == false) {
+        if (m_handle.isNotNull()) {
             unsafe { sfRenderWindow_destroy(m_handle) }
             m_handle = CPointer()
         }

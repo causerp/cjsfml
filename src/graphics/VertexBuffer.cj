@@ -60,7 +60,7 @@ public class VertexBuffer <: ResourceHandle & RenderTargetDrawable & Equatable<V
     }
 
     ~init() {
-        if (m_handle.isNull() == false) {
+        if (m_handle.isNotNull()) {
             unsafe { sfVertexBuffer_destroy(m_handle) }
             m_handle = CPointer()
         }

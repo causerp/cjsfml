@@ -60,7 +60,7 @@ public class VertexArray <: ResourceHandle & RenderTargetDrawable & Equatable<Ve
     }
 
     ~init() {
-        if (m_handle.isNull() == false) {
+        if (m_handle.isNotNull()) {
             unsafe { sfVertexArray_destroy(m_handle) }
             m_handle = CPointer()
         }

@@ -2,7 +2,7 @@ package cjsfml.system
 
 import std.math.*
 
-public func toCStringUtf32(str: String): CPointer<UInt32> {
+protected func toCStringUtf32(str: String): CPointer<UInt32> {
     unsafe {
         let str32 = LibC.malloc<UInt32>(count: str.size + 1)
         var index = 0
@@ -15,7 +15,7 @@ public func toCStringUtf32(str: String): CPointer<UInt32> {
     }
 }
 
-public func toString(str32: CPointer<UInt32>): String {
+protected func toString(str32: CPointer<UInt32>): String {
     let sb = StringBuilder()
     for (i in 0..Int64(Int32.Max)) {
         let utf32Char = unsafe { str32.read(i) }

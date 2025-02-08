@@ -149,7 +149,7 @@ public class Texture <: ResourceHandle & Equatable<Texture> {
     }
 
     ~init() {
-        if (m_handle.isNull() == false && m_isOwner) {
+        if (m_handle.isNotNull() && m_isOwner) {
             unsafe { sfTexture_destroy(m_handle) }
             m_handle = CPointer()
         }

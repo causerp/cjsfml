@@ -88,7 +88,7 @@ public class Window <: SFMLWindow & Equatable<Window> {
     }
 
     ~init() {
-        if (m_handle.isNull() == false) {
+        if (m_handle.isNotNull()) {
             unsafe { sfWindow_destroy(m_handle) }
             m_handle = CPointer()
         }

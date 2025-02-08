@@ -93,7 +93,7 @@ public class Sprite <: ResourceHandle & RenderTargetDrawable & Transformable & E
     }
 
     ~init() {
-        if (m_handle.isNull() == false) {
+        if (m_handle.isNotNull()) {
             unsafe { sfSprite_destroy(m_handle) }
             m_handle = CPointer()
         }

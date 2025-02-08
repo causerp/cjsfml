@@ -97,7 +97,7 @@ public class RectangleShape <: ResourceHandle & RenderTargetDrawable & Transform
     }
 
     ~init() {
-        if (m_handle.isNull() == false) {
+        if (m_handle.isNotNull()) {
             unsafe { sfRectangleShape_destroy(m_handle) }
             m_handle = CPointer()
         }

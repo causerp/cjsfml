@@ -21,6 +21,8 @@ foreign {
 
     func sfImage_saveToFile(handle: CPointer<Unit>, filename: CString): SfBool
 
+    func sfImage_saveToMemory(handle: CPointer<Unit>, buffer: CPointer<Unit>, format: CString): SfBool
+
     func sfImage_getSize(handle: CPointer<Unit>): Vector2u
 
     func sfImage_createMaskFromColor(handle: CPointer<Unit>, color: Color, alpha: UInt8): Unit
@@ -133,7 +135,7 @@ public class Image <: ResourceHandle & Equatable<Image> {
     }
 
     ~init() {
-        if (m_handle.isNull() == false) {
+        if (m_handle.isNotNull()) {
             unsafe { sfImage_destroy(m_handle) }
             m_handle = CPointer()
         }
@@ -182,6 +184,23 @@ public class Image <: ResourceHandle & Equatable<Image> {
             }
         }
         return false
+    }
+
+    public func saveToMemory(format: String): ?Array<Byte> {
+        unsafe {
+            try (buffer = Buffer(), formatRes = LibC.mallocCString(format).asResource()) {
+                if (sfImage_saveToMemory(m_handle, buffer.handle, formatRes.value).toBool()) {
+                    let data = buffer.data
+                    return Array<Byte>(
+                        buffer.size,
+                        {
+                            index => data.read(index)
+                        }
+                    )
+                }
+            }
+        }
+        return None
     }
 
     public prop size: Vector2u {

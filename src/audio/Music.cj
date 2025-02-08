@@ -111,7 +111,7 @@ public class Music <: ResourceHandle & Equatable<Music> {
     }
 
     ~init() {
-        if (m_handle.isNull() == false) {
+        if (m_handle.isNotNull()) {
             unsafe { sfMusic_destroy(m_handle) }
             m_handle = CPointer()
         }

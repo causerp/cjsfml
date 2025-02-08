@@ -68,7 +68,7 @@ public class TransformableImpl <: ResourceHandle & Transformable & Equatable<Tra
     }
 
     ~init() {
-        if (m_handle.isNull() == false) {
+        if (m_handle.isNotNull()) {
             unsafe { sfTransformable_destroy(m_handle) }
             m_handle = CPointer()
         }

@@ -102,7 +102,7 @@ public class CircleShape <: ResourceHandle & RenderTargetDrawable & Transformabl
     }
 
     ~init() {
-        if (m_handle.isNull() == false) {
+        if (m_handle.isNotNull()) {
             unsafe { sfCircleShape_destroy(m_handle) }
             m_handle = CPointer()
         }
