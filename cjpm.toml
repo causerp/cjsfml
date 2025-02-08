@@ -16,8 +16,8 @@
   endian = { git = "https://github.com/causerp/endian.git", tag = "v1.0.0"}
 
 [ffi.c]
-  csfml-audio = { path = "./csfml/install" }
-  csfml-graphics = { path = "./csfml/install" }
-  csfml-network = { path = "./csfml/install" }
-  csfml-system = { path = "./csfml/install" }
-  csfml-window = { path = "./csfml/install" }
+  csfml-audio = { path = "./csfml/install/lib" }
+  csfml-graphics = { path = "./csfml/install/lib" }
+  csfml-network = { path = "./csfml/install/lib" }
+  csfml-system = { path = "./csfml/install/lib" }
+  csfml-window = { path = "./csfml/install/lib" }

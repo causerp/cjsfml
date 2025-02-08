@@ -30,7 +30,7 @@ jobs:
             toolchain: /usr/local/share/vcpkg/scripts/buildsystems/vcpkg.cmake
           - preset: windows-release
             os: windows-latest
-            triplet: x64-windows
+            triplet: x64-mingw-dynamic
             toolchain: C:/vcpkg/scripts/buildsystems/vcpkg.cmake
         exclude:
           - os: ubuntu-latest
@@ -77,6 +77,18 @@ jobs:
     - name: Setup Ninja
       uses: turtlesec-no/get-ninja@main
 
+    - name: Setup Cangjie
+      if: runner.os == 'Linux'
+      run: |
+        curl -L -o Cangjie-0.53.18-linux_x64.tar.gz https://github.com/causerp/cangjie/releases/download/v0.53.18/Cangjie-0.53.18-linux_x64.tar.gz
+        tar -xzf Cangjie-0.53.18-linux_x64.tar.gz -C .
+
+    - name: Setup Cangjie
+      if: runner.os == 'Windows'
+      run: |
+        Invoke-WebRequest -Uri "https://github.com/causerp/cangjie/releases/download/v0.53.18/Cangjie-0.53.18-windows_x64.zip" -OutFile "Cangjie-0.53.18-windows_x64.zip"
+        Expand-Archive -Path "Cangjie-0.53.18-windows_x64.zip" -DestinationPath "."
+
     - name: Download CSFML
       shell: bash
       run: ./download_csfml.sh
@@ -84,10 +96,23 @@ jobs:
     - name: Install vcpkg dependencies
       run: |
         vcpkg install sfml --triplet=${{ matrix.triplet }}
-      shell: bash
 
-    - name: Build
+    - name: Build CSFML
       run: |
         cd csfml
         cmake --preset ${{ matrix.preset }} -DCMAKE_TOOLCHAIN_FILE=${{ matrix.toolchain }}
         cmake --build --preset ${{ matrix.preset }} --target install
+
+    - name: Build and test cjsfml
+      if: runner.os == 'Linux'
+      shell: bash
+      run: |
+        source ./cangjie/envsetup.sh
+        cjpm build
+        cjpm test
+
+    - name: Build cjsfml
+      if: runner.os == 'Windows'
+      run: |
+        .\cangjie\envsetup.ps1
+        cjpm build
