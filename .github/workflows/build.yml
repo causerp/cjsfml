@@ -64,9 +64,9 @@ jobs:
     - name: Setup w64devkit
       if: runner.os == 'Windows'
       run: |
-        curl -LO https://github.com/skeeto/w64devkit/releases/download/v2.1.0/w64devkit-x64-2.1.0.exe
-        start /b /wait w64devkit-x64-2.1.0.exe -oC:\ -y
-        echo "C:\w64devkit\bin" >> $GITHUB_ENV
+        Invoke-WebRequest -Uri "https://github.com/skeeto/w64devkit/releases/download/v2.1.0/w64devkit-x64-2.1.0.exe" -OutFile "w64devkit-x64-2.1.0.exe"
+        Start-Process -FilePath "w64devkit-x64-2.1.0.exe" -ArgumentList "-oC:\", "-y" -Wait
+        echo "C:\w64devkit\bin" | Out-File -FilePath $env:GITHUB_ENV -Append
 
     - name: Verify w64devkit installation
       if: runner.os == 'Windows'
