@@ -1,5 +1,6 @@
 * text=auto eol=lf
 *.a     binary
+*.bat   text eol=crlf
 *.cj    text
 *.dll   binary
 *.gif   binary
