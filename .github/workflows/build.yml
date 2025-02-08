@@ -88,5 +88,6 @@ jobs:
 
     - name: Build
       run: |
+        cd csfml
         cmake --preset ${{ matrix.preset }} -DCMAKE_TOOLCHAIN_FILE=${{ matrix.toolchain }}
         cmake --build --preset ${{ matrix.preset }} --target install
