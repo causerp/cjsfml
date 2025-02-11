@@ -49,14 +49,14 @@ public struct Transform {
     }
 
     public operator func ==(right: Transform): Bool {
-        (matrix[0] == right.matrix[0] && matrix[1] == right.matrix[1] && matrix[2] == right.matrix[2] && matrix[3] ==
-            right.matrix[3] && matrix[4] == right.matrix[4] && matrix[5] == right.matrix[5] && matrix[6] == right.matrix[6] &&
+        (matrix[0] == right.matrix[0] && matrix[1] == right.matrix[1] && matrix[2] == right.matrix[2] && matrix[3] == right
+            .matrix[3] && matrix[4] == right.matrix[4] && matrix[5] == right.matrix[5] && matrix[6] == right.matrix[6] &&
             matrix[7] == right.matrix[7] && matrix[8] == right.matrix[8])
     }
 
     public operator func !=(right: Transform): Bool {
-        (matrix[0] != right.matrix[0] || matrix[1] != right.matrix[1] || matrix[2] != right.matrix[2] || matrix[3] !=
-            right.matrix[3] || matrix[4] != right.matrix[4] || matrix[5] != right.matrix[5] || matrix[6] != right.matrix[6] ||
+        (matrix[0] != right.matrix[0] || matrix[1] != right.matrix[1] || matrix[2] != right.matrix[2] || matrix[3] != right
+            .matrix[3] || matrix[4] != right.matrix[4] || matrix[5] != right.matrix[5] || matrix[6] != right.matrix[6] ||
             matrix[7] != right.matrix[7] || matrix[8] != right.matrix[8])
     }
 
@@ -76,7 +76,7 @@ public struct Transform {
         matrix[x * 3 + y] = value
     }
 
-    public static let Identity = Transform()
+    public static let identity = Transform()
 
     public func getMatrix(): Array<Float32> {
         var matrix = Array<Float32>(16, item: 0.0)

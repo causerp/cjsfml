@@ -90,13 +90,13 @@ public struct Color {
         UInt32((UInt32(r) << 24) | (UInt32(g) << 16) | (UInt32(b) << 8) | UInt32(a))
     }
 
-    public static const Black = Color(0, 0, 0)
-    public static const White = Color(255, 255, 255)
-    public static const Red = Color(255, 0, 0)
-    public static const Green = Color(0, 255, 0)
-    public static const Blue = Color(0, 0, 255)
-    public static const Yellow = Color(255, 255, 0)
-    public static const Magenta = Color(255, 0, 255)
-    public static const Cyan = Color(0, 255, 255)
-    public static const Transparent = Color(0, 0, 0, 0)
+    public static const black = Color(0, 0, 0)
+    public static const white = Color(255, 255, 255)
+    public static const red = Color(255, 0, 0)
+    public static const green = Color(0, 255, 0)
+    public static const blue = Color(0, 0, 255)
+    public static const yellow = Color(255, 255, 0)
+    public static const magenta = Color(255, 0, 255)
+    public static const cyan = Color(0, 255, 255)
+    public static const transparent = Color(0, 0, 0, 0)
 }

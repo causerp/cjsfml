@@ -51,7 +51,7 @@ class TestTime {
 
     @TestCase
     func zero_const() {
-        var time = Time.Zero
+        var time = Time.zero
 
         @Expect(time.seconds, 0.0)
         @Expect(time.milliseconds, 0)

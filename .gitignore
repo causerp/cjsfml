@@ -1,3 +1,5 @@
+*.a
+*.dll
 *.exe
 *.macrocall
 .cache

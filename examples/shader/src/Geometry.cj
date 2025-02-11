@@ -71,7 +71,7 @@ class Geometry <: Effect {
     protected func onUpdate(_: Float32, x: Float32, y: Float32): Unit {
         if (!m_shader.isClosed()) {
             // Reset our transformation matrix
-            m_transform = Transform.Identity
+            m_transform = Transform.identity
             // Move to the center of the window
             m_transform = m_transform.translate(400.0, 300.0)
             // Rotate everything based on cursor position

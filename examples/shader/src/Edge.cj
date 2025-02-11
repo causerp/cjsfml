@@ -83,7 +83,7 @@ class Edge <: Effect {
 
             // Render the updated scene to the off-screen surface
             if (let Some(surface) <- m_surface) {
-                surface.clear(Color.White)
+                surface.clear(Color.white)
                 surface.draw(m_backgroundSprite)
                 for (entity in m_entities) {
                     surface.draw(entity)

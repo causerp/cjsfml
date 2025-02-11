@@ -37,22 +37,22 @@ main(): Int64 {
     // Create the left paddle
     let leftPaddle = RectangleShape(paddleSize - (3.0, 3.0))
     leftPaddle.outlineThickness = 3.0
-    leftPaddle.outlineColor = Color.Black
+    leftPaddle.outlineColor = Color.black
     leftPaddle.fillColor = Color(100, 100, 200)
     leftPaddle.origin = paddleSize / 2.0
 
     // Create the right paddle
     let rightPaddle = RectangleShape(paddleSize - (3.0, 3.0))
     rightPaddle.outlineThickness = 3.0
-    rightPaddle.outlineColor = Color.Black
+    rightPaddle.outlineColor = Color.black
     rightPaddle.fillColor = Color(200, 100, 100)
     rightPaddle.origin = paddleSize / 2.0
 
     // Create the ball
     let ball = CircleShape(ballRadius - 3.0)
     ball.outlineThickness = 2.0
-    ball.outlineColor = Color.Black
-    ball.fillColor = Color.White
+    ball.outlineColor = Color.black
+    ball.fillColor = Color.white
     ball.origin = Vector2f(ballRadius / 2.0, ballRadius / 2.0)
 
     // Load the text font
@@ -61,7 +61,7 @@ main(): Int64 {
     // Initialize the pause message
     let pauseMessage = Text(font, characterSize: 40)
     pauseMessage.position = Vector2f(170.0, 200.0)
-    pauseMessage.fillColor = Color.White
+    pauseMessage.fillColor = Color.white
     pauseMessage.string = "Welcome to SFML Tennis!\n\nPress space to start the game."
 
     // Define the paddles properties
@@ -213,7 +213,9 @@ main(): Int64 {
                 }
 
                 ballSound.play()
-                ball.position = Vector2f(rightPaddle.position.x - ballRadius - paddleSize.x / 2.0 - 0.1, ball.position.y
+                ball.position = Vector2f(
+                    rightPaddle.position.x - ballRadius - paddleSize.x / 2.0 - 0.1,
+                    ball.position.y
                 )
             }
         }

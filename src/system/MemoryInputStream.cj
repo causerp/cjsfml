@@ -88,7 +88,7 @@ public class MemoryInputStream <: InputStream {
     public init(buffer: Array<Byte>) {
         super(
             InputStreamData(memoryInputStream_read, memoryInputStream_seek, memoryInputStream_tell,
-            memoryInputStream_getSize, CPointer()))
+                memoryInputStream_getSize, CPointer()))
 
         if (buffer.isEmpty()) {
             throw SFMLException("Empty array")

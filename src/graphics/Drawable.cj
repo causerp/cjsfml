@@ -2,7 +2,7 @@ package cjsfml.graphics
 
 public interface Drawable {
     func draw(target: RenderTarget): Unit {
-        draw(target, RenderStates.Default)
+        draw(target, RenderStates.default)
     }
 
     func draw(target: RenderTarget, states: RenderStates): Unit

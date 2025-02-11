@@ -7,7 +7,7 @@ public struct RenderStates {
     private var m_texture: CPointer<Unit>
     private var m_shader: CPointer<Unit>
 
-    public init(blendMode!: BlendMode = BlendMode.Alpha, transform!: Transform = Transform.Identity,
+    public init(blendMode!: BlendMode = BlendMode.alpha, transform!: Transform = Transform.identity,
         texture!: ?Texture = None, shader!: ?Shader = None) {
         m_blendMode = blendMode
         m_transform = transform
@@ -59,5 +59,5 @@ public struct RenderStates {
         }
     }
 
-    public static let Default: RenderStates = RenderStates()
+    public static let default = RenderStates()
 }

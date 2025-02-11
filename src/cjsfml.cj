@@ -6,6 +6,6 @@ import cjsfml.graphics.*
 import cjsfml.system.*
 import cjsfml.window.*
 
-public const CJSFML_VERSION_MAJOR: Int32 = 2
-public const CJSFML_VERSION_MINOR: Int32 = 6
-public const CJSFML_VERSION_PATCH: Int32 = 1
+public const cjsfmlVersionMajor: Int32 = 2
+public const cjsfmlVersionMinor: Int32 = 6
+public const cjsfmlVersionPatch: Int32 = 1

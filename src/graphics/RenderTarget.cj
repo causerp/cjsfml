@@ -4,7 +4,7 @@ import cjsfml.system.*
 
 public interface RenderTarget <: ResourceHandle {
     func clear(): Unit {
-        clear(Color.Black)
+        clear(Color.black)
     }
 
     func clear(color: Color): Unit
@@ -30,25 +30,25 @@ public interface RenderTarget <: ResourceHandle {
     func drawRenderTarget(drawable: RenderTargetDrawable, states: RenderStates): Unit
 
     func draw(drawable: Drawable): Unit {
-        draw(drawable, RenderStates.Default)
+        draw(drawable, RenderStates.default)
     }
 
     func draw(drawable: Drawable, states: RenderStates): Unit
 
     func draw(vertices: Array<Vertex>, primitiveType: PrimitiveType): Unit {
-        draw(vertices, primitiveType, RenderStates.Default)
+        draw(vertices, primitiveType, RenderStates.default)
     }
 
     func draw(vertices: Array<Vertex>, primitiveType: PrimitiveType, states: RenderStates): Unit
 
     func draw(vertexBuffer: VertexBuffer): Unit {
-        draw(vertexBuffer, RenderStates.Default)
+        draw(vertexBuffer, RenderStates.default)
     }
 
     func draw(vertexBuffer: VertexBuffer, states: RenderStates): Unit
 
     func draw(vertexBuffer: VertexBuffer, firstVertex: Int64, vertexCount: Int64): Unit {
-        draw(vertexBuffer, firstVertex, vertexCount, RenderStates.Default)
+        draw(vertexBuffer, firstVertex, vertexCount, RenderStates.default)
     }
 
     func draw(vertexBuffer: VertexBuffer, firstVertex: Int64, vertexCount: Int64, states: RenderStates): Unit

@@ -51,26 +51,27 @@ main(): Int64 {
             match (evt) {
                 // Close window: exit
                 case EvtClosed => window.closeWindow()
-                case EvtKeyPressed(keyEvt) => if (keyEvt.code == KeyCode.Escape) {
-                    // Escape key: exit
-                    window.closeWindow()
-                } else if (keyEvt.code == KeyCode.Left) {
-                    // Left arrow key: previous shader
-                    if (current == 0) {
-                        current = effects.size - 1
-                    } else {
-                        current--
+                case EvtKeyPressed(keyEvt) =>
+                    if (keyEvt.code == KeyCode.Escape) {
+                        // Escape key: exit
+                        window.closeWindow()
+                    } else if (keyEvt.code == KeyCode.Left) {
+                        // Left arrow key: previous shader
+                        if (current == 0) {
+                            current = effects.size - 1
+                        } else {
+                            current--
+                        }
+                        description.string = "Current effect: ${effects[current].name}"
+                    } else if (keyEvt.code == KeyCode.Right) {
+                        // Right arrow key: next shader
+                        if (current == effects.size - 1) {
+                            current = 0
+                        } else {
+                            current++
+                        }
+                        description.string = "Current effect: ${effects[current].name}"
                     }
-                    description.string = "Current effect: ${effects[current].name}"
-                } else if (keyEvt.code == KeyCode.Right) {
-                    // Right arrow key: next shader
-                    if (current == effects.size - 1) {
-                        current = 0
-                    } else {
-                        current++
-                    }
-                    description.string = "Current effect: ${effects[current].name}"
-                }
                 case _ => ()
             }
         }
@@ -85,7 +86,7 @@ main(): Int64 {
 
         // Clear the window
         if (effects[current].name == "Edge Post-effect") {
-            window.clear(Color.White)
+            window.clear(Color.white)
         } else {
             window.clear(Color(50, 50, 50))
         }

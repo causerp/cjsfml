@@ -67,8 +67,8 @@ foreign {
 @C
 public struct TimeSpan {
     public TimeSpan(
-        public var offset!: Time = Time.Zero,
-        public var length!: Time = Time.Zero
+        public var offset!: Time = Time.zero,
+        public var length!: Time = Time.zero
     ) {}
 }
 

@@ -51,8 +51,8 @@ public struct KeyEvent <: Equatable<KeyEvent> & Hashable {
     }
 
     public operator func ==(right: KeyEvent): Bool {
-        code == right.code && scancode == right.scancode && alt == right.alt && control == right.control && shift ==
-            right.shift && system == right.system
+        code == right.code && scancode == right.scancode && alt == right.alt && control == right.control && shift == right
+            .shift && system == right.system
     }
 
     public operator func !=(right: KeyEvent): Bool {
