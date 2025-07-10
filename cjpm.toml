@@ -1,19 +1,20 @@
 [package]
-  cjc-version = "0.53.18"
-  compile-option = "--dy-std --dy-libs -O2"
-  description = "SFML library bindings"
-  link-option = ""
+  cjc-version = "1.0.0"
   name = "cjsfml"
-  output-type = "dynamic"
-  src-dir = ""
+  description = "SFML library bindings"
+  version = "1.1.0"
   target-dir = ""
-  version = "1.0.0"
+  src-dir = ""
+  output-type = "dynamic"
+  compile-option = "--dy-std --dy-libs -O2"
+  override-compile-option = ""
+  link-option = ""
   package-configuration = {}
 
 [dependencies]
-  cenum = { git = "https://github.com/causerp/cenum.git", tag = "v1.0.0"}
-  ctemplate = { git = "https://github.com/causerp/ctemplate.git", tag = "v1.0.0"}
-  endian = { git = "https://github.com/causerp/endian.git", tag = "v1.0.0"}
+  cenum = { git = "https://github.com/causerp/cenum.git", tag = "v1.1.0"}
+  ctemplate = { git = "https://github.com/causerp/ctemplate.git", tag = "v1.1.0"}
+  endian = { git = "https://github.com/causerp/endian.git", tag = "v1.1.0"}
 
 [ffi.c]
   csfml-audio = { path = "./csfml/install/lib" }
