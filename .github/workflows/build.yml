@@ -84,6 +84,7 @@ jobs:
           pkgs: sfml
           triplet: ${{ matrix.triplet }}
           extra-args: --overlay-ports=${{ github.workspace }}/vcpkg
+          cache-key: vcpkg-${{ matrix.preset }}
           token: ${{ secrets.GITHUB_TOKEN }}
           vcpkg-subdir: 'vcpkg-repo'
 
