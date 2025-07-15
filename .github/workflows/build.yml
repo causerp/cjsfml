@@ -2,9 +2,6 @@ name: build
 
 on: [push, pull_request]
 
-env:
-  VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
-
 jobs:
   build:
     name: ${{ matrix.preset }}
@@ -27,11 +24,9 @@ jobs:
           - preset: linux-release
             os: ubuntu-latest
             triplet: x64-linux
-            toolchain: /usr/local/share/vcpkg/scripts/buildsystems/vcpkg.cmake
           - preset: windows-release
             os: windows-latest
             triplet: x64-mingw-dynamic
-            toolchain: C:/vcpkg/scripts/buildsystems/vcpkg.cmake
         exclude:
           - os: ubuntu-latest
             preset: windows-release
@@ -45,13 +40,6 @@ jobs:
         uses: lukka/get-cmake@latest
         with:
           cmakeVersion: "3.31.5"
-
-      - name: Enable GitHub Actions cache
-        uses: actions/github-script@v6
-        with:
-          script: |
-            core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
-            core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
       - name: Install CSFML dependencies
         if: runner.os == 'Linux'
@@ -90,21 +78,23 @@ jobs:
         run: ./download_csfml.sh
 
       - name: Install vcpkg dependencies
-        run: |
-          vcpkg install sfml --triplet=${{ matrix.triplet }} --overlay-ports=vcpkg
+        uses: johnwason/vcpkg-action@v7
+        id: vcpkg
+        with:
+          pkgs: sfml
+          triplet: ${{ matrix.triplet }}
+          extra-args: --overlay-ports=${{ github.workspace }}/vcpkg
+          token: ${{ secrets.GITHUB_TOKEN }}
+          vcpkg-subdir: 'vcpkg-repo'
 
       - name: Build CSFML
         run: |
           cd csfml
-          cmake --preset ${{ matrix.preset }} -DCMAKE_TOOLCHAIN_FILE=${{ matrix.toolchain }}
+          cmake --preset ${{ matrix.preset }} -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg-repo/scripts/buildsystems/vcpkg.cmake
           cmake --build --preset ${{ matrix.preset }} --target install
 
-      - name: Build and test cjsfml
-        if: runner.os == 'Linux'
-        run: |
-          cjpm build
-          cjpm test
-
       - name: Build cjsfml
-        if: runner.os == 'Windows'
         run: cjpm build
+
+      - name: Test cjsfml
+        run: cjpm test
