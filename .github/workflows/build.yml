@@ -34,14 +34,14 @@ jobs:
             preset: linux-release
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install CMake
         uses: lukka/get-cmake@latest
         with:
           cmakeVersion: "3.31.5"
 
-      - name: Install CSFML dependencies
+      - name: Install CSFML dependencies (Linux)
         if: runner.os == 'Linux'
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
@@ -49,14 +49,14 @@ jobs:
           version: 1.0
           execute_install_scripts: true
 
-      - name: Setup w64devkit
+      - name: Setup w64devkit (Windows)
         if: runner.os == 'Windows'
         run: |
           Invoke-WebRequest -Uri "https://github.com/skeeto/w64devkit/releases/download/v2.1.0/w64devkit-x64-2.1.0.exe" -OutFile "w64devkit-x64-2.1.0.exe"
           Start-Process -FilePath "w64devkit-x64-2.1.0.exe" -ArgumentList "-oC:\", "-y" -Wait
           echo "C:\w64devkit\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
-      - name: Verify w64devkit installation
+      - name: Verify w64devkit installation (Windows)
         if: runner.os == 'Windows'
         run: |
           gcc --version
@@ -77,7 +77,7 @@ jobs:
         shell: bash
         run: ./download_csfml.sh
 
-      - name: Install vcpkg dependencies
+      - name: Build and Install SFML
         uses: johnwason/vcpkg-action@v7
         id: vcpkg
         with:
@@ -87,6 +87,7 @@ jobs:
           cache-key: vcpkg-${{ matrix.preset }}
           token: ${{ secrets.GITHUB_TOKEN }}
           vcpkg-subdir: 'vcpkg-repo'
+          revision: 'ce613c41372b23b1f51333815feb3edd87ef8a8b'  # 2025.04.09
 
       - name: Build CSFML
         run: |
