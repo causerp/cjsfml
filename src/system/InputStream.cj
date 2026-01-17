@@ -2,9 +2,9 @@ package cjsfml.system
 
 import std.io.{InputStream as IStream, Seekable, SeekPosition}
 
-type InputStreamReadFunc = CFunc<(data: CPointer<Byte>, size: Int64, userData: CPointer<Unit>) -> Int64>
+type InputStreamReadFunc = CFunc<(data: CPointer<Byte>, size: UIntNative, userData: CPointer<Unit>) -> Int64>
 
-type InputStreamSeekFunc = CFunc<(position: Int64, userData: CPointer<Unit>) -> Int64>
+type InputStreamSeekFunc = CFunc<(position: UIntNative, userData: CPointer<Unit>) -> Int64>
 
 type InputStreamTellFunc = CFunc<(userData: CPointer<Unit>) -> Int64>
 
@@ -43,7 +43,7 @@ public abstract class InputStream <: Resource & IStream & Seekable {
         unsafe {
             let rawData = acquireArrayRawData(buffer)
             try {
-                return m_stream.read(rawData.pointer, buffer.size, m_stream.userData)
+                return m_stream.read(rawData.pointer, UIntNative(buffer.size), m_stream.userData)
             } finally {
                 releaseArrayRawData(rawData)
             }
@@ -74,7 +74,7 @@ public abstract class InputStream <: Resource & IStream & Seekable {
             case Current(offset) => position + offset
             case End(offset) => length + offset
         }
-        unsafe { m_stream.seek(seekPos, m_stream.userData) }
+        unsafe { m_stream.seek(UIntNative(seekPos), m_stream.userData) }
     }
 
     public prop stream: InputStreamData {

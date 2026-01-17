@@ -26,7 +26,7 @@ foreign {
     func sfView_setViewport(handle: CPointer<Unit>, viewport: FloatRect): Unit
 
     @FastNative
-    func sfView_reset(handle: CPointer<Unit>, rectangle: FloatRect): Unit
+    func sfView_setScissor(handle: CPointer<Unit>, scissor: FloatRect): Unit
 
     @FastNative
     func sfView_getCenter(handle: CPointer<Unit>): Vector2f
@@ -39,6 +39,9 @@ foreign {
 
     @FastNative
     func sfView_getViewport(handle: CPointer<Unit>): FloatRect
+
+    @FastNative
+    func sfView_getScissor(handle: CPointer<Unit>): FloatRect
 
     @FastNative
     func sfView_move(handle: CPointer<Unit>, offset: Vector2f): Unit
@@ -163,8 +166,30 @@ public class View <: ResourceHandle & Equatable<View> {
         }
     }
 
+    public mut prop scissor: FloatRect {
+        get() {
+            unsafe { sfView_getScissor(m_handle) }
+        }
+        set(value) {
+            unsafe { sfView_setScissor(m_handle, value) }
+        }
+    }
+
     public func reset(rectangle: FloatRect): Unit {
-        unsafe { sfView_reset(m_handle, rectangle) }
+        let center = Vector2f(
+            rectangle.position.x + rectangle.size.x / 2.0,
+            rectangle.position.y + rectangle.size.y / 2.0
+        )
+        let size = rectangle.size
+        let defaultRect = FloatRect(0.0, 0.0, 1.0, 1.0)
+
+        unsafe {
+            sfView_setCenter(m_handle, center)
+            sfView_setSize(m_handle, size)
+            sfView_setRotation(m_handle, 0.0)
+            sfView_setViewport(m_handle, defaultRect)
+            sfView_setScissor(m_handle, defaultRect)
+        }
     }
 
     public func move(offset: Vector2f): Unit {

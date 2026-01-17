@@ -77,11 +77,10 @@ jobs:
         with:
           pkgs: sfml
           triplet: ${{ matrix.triplet }}
-          extra-args: --overlay-ports=${{ github.workspace }}/vcpkg
           cache-key: vcpkg-${{ matrix.preset }}
           token: ${{ secrets.GITHUB_TOKEN }}
           vcpkg-subdir: 'vcpkg-repo'
-          revision: 'ce613c41372b23b1f51333815feb3edd87ef8a8b'  # 2025.04.09
+          revision: '84bab45d415d22042bd0b9081aea57f362da3f35'  # 2025.12.12
 
       - name: Build CSFML
         run: |

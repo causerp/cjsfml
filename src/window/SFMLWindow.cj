@@ -9,17 +9,25 @@ public interface SFMLWindow <: ResourceHandle {
 
     func pollEvent(): ?Event
 
-    func waitEvent(): ?Event
+    func waitEvent(): ?Event {
+        waitEvent(Time.zero)
+    }
+
+    func waitEvent(timeout: Time): ?Event
 
     mut prop position: Vector2i
 
     mut prop size: Vector2u
 
+    func setMinimumSize(size: ?Vector2u): Unit
+
+    func setMaximumSize(size: ?Vector2u): Unit
+
     func setTitle(title: String): Unit
 
-    func setIcon(width: UInt32, height: UInt32, pixels: Array<UInt8>): Unit
+    func setIcon(size: Vector2u, pixels: Array<UInt8>): Unit
 
-    func setIcon(width: UInt32, height: UInt32, pixels: CPointer<UInt8>): Unit
+    func setIcon(size: Vector2u, pixels: CPointer<UInt8>): Unit
 
     func setVisible(visible: Bool): Unit
 
@@ -37,7 +45,7 @@ public interface SFMLWindow <: ResourceHandle {
 
     prop hasFocus: Bool
 
-    prop systemHandle: CPointer<Unit>
+    prop nativeHandle: CPointer<Unit>
 
     // extra
 

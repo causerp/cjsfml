@@ -5,7 +5,7 @@ public struct ContextSettings {
     public const ContextSettings(
         public let depthBits!: UInt32 = 0,
         public let stencilBits!: UInt32 = 0,
-        public let antialiasingLevel!: UInt32 = 0,
+        public let antiAliasingLevel!: UInt32 = 0,
         public let majorVersion!: UInt32 = 1,
         public let minorVersion!: UInt32 = 1,
         public let attributeFlags!: ContextAttribute = ContextAttribute.Default,
