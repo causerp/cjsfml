@@ -69,12 +69,15 @@ public abstract class InputStream <: Resource & IStream & Seekable {
     }
 
     public func seek(sp: SeekPosition): Int64 {
-        let seekPos = match (sp) {
+        var seekPos = match (sp) {
             case Begin(offset) => offset
             case Current(offset) => position + offset
             case End(offset) => length + offset
         }
-        unsafe { m_stream.seek(UIntNative(seekPos), m_stream.userData) }
+        if (seekPos < 0) {
+            return -1
+        }
+        return unsafe { m_stream.seek(UIntNative(seekPos), m_stream.userData) }
     }
 
     public prop stream: InputStreamData {

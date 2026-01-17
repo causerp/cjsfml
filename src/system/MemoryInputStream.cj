@@ -35,7 +35,7 @@ private func memoryInputStream_seek(position: UIntNative, userData: CPointer<Uni
         let position = Int64(position)
         var memory = memoryPtr.read()
         if (position < 0) {
-            memory.offset = 0
+            return -1
         } else if (position < memory.size) {
             memory.offset = position
         } else {
