@@ -125,11 +125,11 @@ public class Sprite <: ResourceHandle & RenderTargetDrawable & Transformable & E
 
     // Equatable
 
-    public operator override func ==(right: Sprite): Bool {
+    public override operator func ==(right: Sprite): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public operator override func !=(right: Sprite): Bool {
+    public override operator func !=(right: Sprite): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

@@ -126,11 +126,11 @@ public class Font <: ResourceHandle & Equatable<Font> {
 
     // Equatable
 
-    public operator override func ==(right: Font): Bool {
+    public override operator func ==(right: Font): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public operator override func !=(right: Font): Bool {
+    public override operator func !=(right: Font): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

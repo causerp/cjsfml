@@ -49,11 +49,11 @@ public struct Color {
         a = rgba[3]
     }
 
-    public operator const func ==(right: Color): Bool {
+    public const operator func ==(right: Color): Bool {
         (r == right.r && g == right.g && b == right.b && a == right.a)
     }
 
-    public operator const func !=(right: Color): Bool {
+    public const operator func !=(right: Color): Bool {
         (r != right.r || g != right.g || b != right.b || a != right.a)
     }
 

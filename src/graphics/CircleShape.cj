@@ -134,11 +134,11 @@ public class CircleShape <: ResourceHandle & RenderTargetDrawable & Transformabl
 
     // Equatable
 
-    public operator override func ==(right: CircleShape): Bool {
+    public override operator func ==(right: CircleShape): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public operator override func !=(right: CircleShape): Bool {
+    public override operator func !=(right: CircleShape): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

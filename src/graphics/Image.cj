@@ -167,11 +167,11 @@ public class Image <: ResourceHandle & Equatable<Image> {
 
     // Equatable
 
-    public operator override func ==(right: Image): Bool {
+    public override operator func ==(right: Image): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public operator override func !=(right: Image): Bool {
+    public override operator func !=(right: Image): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

@@ -42,39 +42,39 @@ public struct Time {
         }
     }
 
-    public operator const func ==(right: Time): Bool {
+    public const operator func ==(right: Time): Bool {
         microseconds == right.microseconds
     }
 
-    public operator const func !=(right: Time): Bool {
+    public const operator func !=(right: Time): Bool {
         microseconds != right.microseconds
     }
 
-    public operator const func >(right: Time): Bool {
+    public const operator func >(right: Time): Bool {
         microseconds > right.microseconds
     }
 
-    public operator const func >=(right: Time): Bool {
+    public const operator func >=(right: Time): Bool {
         microseconds >= right.microseconds
     }
 
-    public operator const func <(right: Time): Bool {
+    public const operator func <(right: Time): Bool {
         microseconds < right.microseconds
     }
 
-    public operator const func <=(right: Time): Bool {
+    public const operator func <=(right: Time): Bool {
         microseconds <= right.microseconds
     }
 
-    public operator const func -(): Time {
+    public const operator func -(): Time {
         Time(microseconds: -microseconds)
     }
 
-    public operator const func +(right: Time): Time {
+    public const operator func +(right: Time): Time {
         Time(microseconds: microseconds + right.microseconds)
     }
 
-    public operator const func -(right: Time): Time {
+    public const operator func -(right: Time): Time {
         Time(microseconds: microseconds - right.microseconds)
     }
 

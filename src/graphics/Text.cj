@@ -160,11 +160,11 @@ public class Text <: ResourceHandle & RenderTargetDrawable & Transformable & Equ
 
     // Equatable
 
-    public operator override func ==(right: Text): Bool {
+    public override operator func ==(right: Text): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public operator override func !=(right: Text): Bool {
+    public override operator func !=(right: Text): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

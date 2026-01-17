@@ -21,7 +21,7 @@ foreign {
 }
 
 public class Listener {
-    public mut static prop globalVolume: Float32 {
+    public static mut prop globalVolume: Float32 {
         get() {
             unsafe { sfListener_getGlobalVolume() }
         }
@@ -30,7 +30,7 @@ public class Listener {
         }
     }
 
-    public mut static prop position: Vector3f {
+    public static mut prop position: Vector3f {
         get() {
             unsafe { sfListener_getPosition() }
         }
@@ -39,7 +39,7 @@ public class Listener {
         }
     }
 
-    public mut static prop direction: Vector3f {
+    public static mut prop direction: Vector3f {
         get() {
             unsafe { sfListener_getDirection() }
         }
@@ -48,7 +48,7 @@ public class Listener {
         }
     }
 
-    public mut static prop upVector: Vector3f {
+    public static mut prop upVector: Vector3f {
         get() {
             unsafe { sfListener_getUpVector() }
         }

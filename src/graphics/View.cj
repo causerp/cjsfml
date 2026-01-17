@@ -13,28 +13,40 @@ foreign {
 
     // View
 
+    @FastNative
     func sfView_setCenter(handle: CPointer<Unit>, center: Vector2f): Unit
 
+    @FastNative
     func sfView_setSize(handle: CPointer<Unit>, size: Vector2f): Unit
 
+    @FastNative
     func sfView_setRotation(handle: CPointer<Unit>, angle: Float32): Unit
 
+    @FastNative
     func sfView_setViewport(handle: CPointer<Unit>, viewport: FloatRect): Unit
 
+    @FastNative
     func sfView_reset(handle: CPointer<Unit>, rectangle: FloatRect): Unit
 
+    @FastNative
     func sfView_getCenter(handle: CPointer<Unit>): Vector2f
 
+    @FastNative
     func sfView_getSize(handle: CPointer<Unit>): Vector2f
 
+    @FastNative
     func sfView_getRotation(handle: CPointer<Unit>): Float32
 
+    @FastNative
     func sfView_getViewport(handle: CPointer<Unit>): FloatRect
 
+    @FastNative
     func sfView_move(handle: CPointer<Unit>, offset: Vector2f): Unit
 
+    @FastNative
     func sfView_rotate(handle: CPointer<Unit>, angle: Float32): Unit
 
+    @FastNative
     func sfView_zoom(handle: CPointer<Unit>, factor: Float32): Unit
 }
 
@@ -105,11 +117,11 @@ public class View <: ResourceHandle & Equatable<View> {
 
     // Equatable
 
-    public operator override func ==(right: View): Bool {
+    public override operator func ==(right: View): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public operator override func !=(right: View): Bool {
+    public override operator func !=(right: View): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

@@ -100,11 +100,11 @@ public class TransformableImpl <: ResourceHandle & Transformable & Equatable<Tra
 
     // Equatable
 
-    public operator override func ==(right: TransformableImpl): Bool {
+    public override operator func ==(right: TransformableImpl): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public operator override func !=(right: TransformableImpl): Bool {
+    public override operator func !=(right: TransformableImpl): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

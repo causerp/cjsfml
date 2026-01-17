@@ -1,7 +1,6 @@
 package shader
 
 import cjsfml.graphics.*
-import cjsfml.system.*
 
 // "Pixelate" fragment shader
 class Pixelate <: Effect {

@@ -4,7 +4,6 @@ import cjsfml.graphics.*
 import cjsfml.system.*
 import std.collection.*
 import std.math.*
-import std.random.*
 
 // "Edge" post-effect fragment shader
 class Edge <: Effect {

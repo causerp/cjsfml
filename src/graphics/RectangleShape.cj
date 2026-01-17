@@ -129,11 +129,11 @@ public class RectangleShape <: ResourceHandle & RenderTargetDrawable & Transform
 
     // Equatable
 
-    public operator override func ==(right: RectangleShape): Bool {
+    public override operator func ==(right: RectangleShape): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public operator override func !=(right: RectangleShape): Bool {
+    public override operator func !=(right: RectangleShape): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

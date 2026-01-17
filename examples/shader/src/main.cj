@@ -1,11 +1,8 @@
 package shader
 
-import cjsfml.audio.*
 import cjsfml.graphics.*
 import cjsfml.system.*
 import cjsfml.window.*
-import std.math.*
-import std.random.*
 
 main(): Int64 {
     // Create the main window
