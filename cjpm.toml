@@ -19,6 +19,5 @@
 [ffi.c]
   csfml-audio = { path = "./csfml" }
   csfml-graphics = { path = "./csfml" }
-  csfml-network = { path = "./csfml" }
   csfml-system = { path = "./csfml" }
   csfml-window = { path = "./csfml" }
