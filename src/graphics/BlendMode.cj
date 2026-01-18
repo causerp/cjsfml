@@ -61,13 +61,13 @@ public struct BlendMode {
         alphaEquation = blendEquation
     }
 
-    public const operator func ==(right: BlendMode): Bool {
+    public operator const func ==(right: BlendMode): Bool {
         (colorSrcFactor.value == right.colorSrcFactor.value && colorDstFactor.value == right.colorDstFactor.value &&
             colorEquation.value == right.colorEquation.value && alphaSrcFactor.value == right.alphaSrcFactor.value &&
             alphaDstFactor.value == right.alphaDstFactor.value && alphaEquation.value == right.alphaEquation.value)
     }
 
-    public const operator func !=(right: BlendMode): Bool {
+    public operator const func !=(right: BlendMode): Bool {
         (colorSrcFactor.value != right.colorSrcFactor.value || colorDstFactor.value != right.colorDstFactor.value ||
             colorEquation.value != right.colorEquation.value || alphaSrcFactor.value != right.alphaSrcFactor.value ||
             alphaDstFactor.value != right.alphaDstFactor.value || alphaEquation.value != right.alphaEquation.value)

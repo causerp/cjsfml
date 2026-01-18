@@ -91,11 +91,11 @@ public class Cursor <: ResourceHandle & Equatable<Cursor> {
 
     // Equatable
 
-    public override operator func ==(right: Cursor): Bool {
+    public operator override func ==(right: Cursor): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public override operator func !=(right: Cursor): Bool {
+    public operator override func !=(right: Cursor): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 }

@@ -120,11 +120,11 @@ public class View <: ResourceHandle & Equatable<View> {
 
     // Equatable
 
-    public override operator func ==(right: View): Bool {
+    public operator override func ==(right: View): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public override operator func !=(right: View): Bool {
+    public operator override func !=(right: View): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

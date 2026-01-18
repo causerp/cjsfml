@@ -120,11 +120,11 @@ public class Window <: SFMLWindow & Equatable<Window> {
 
     // Equatable
 
-    public override operator func ==(right: Window): Bool {
+    public operator override func ==(right: Window): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public override operator func !=(right: Window): Bool {
+    public operator override func !=(right: Window): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

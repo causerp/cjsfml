@@ -187,11 +187,11 @@ public class Texture <: ResourceHandle & Equatable<Texture> {
 
     // Equatable
 
-    public override operator func ==(right: Texture): Bool {
+    public operator override func ==(right: Texture): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public override operator func !=(right: Texture): Bool {
+    public operator override func !=(right: Texture): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

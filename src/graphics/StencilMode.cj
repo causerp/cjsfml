@@ -32,13 +32,13 @@ public struct StencilMode {
         public let stencilOnly!: Bool = false
     ) {}
 
-    public const operator func ==(right: StencilMode): Bool {
+    public operator const func ==(right: StencilMode): Bool {
         (stencilComparison.value == right.stencilComparison.value && stencilUpdateOperation.value == right
             .stencilUpdateOperation.value && stencilReference == right.stencilReference && stencilMask == right
             .stencilMask && stencilOnly == right.stencilOnly)
     }
 
-    public const operator func !=(right: StencilMode): Bool {
+    public operator const func !=(right: StencilMode): Bool {
         (stencilComparison.value != right.stencilComparison.value || stencilUpdateOperation.value != right
             .stencilUpdateOperation.value || stencilReference != right.stencilReference || stencilMask != right
             .stencilMask || stencilOnly != right.stencilOnly)

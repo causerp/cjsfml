@@ -141,11 +141,11 @@ public class Music <: ResourceHandle & Equatable<Music> {
 
     // Equatable
 
-    public override operator func ==(right: Music): Bool {
+    public operator override func ==(right: Music): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public override operator func !=(right: Music): Bool {
+    public operator override func !=(right: Music): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

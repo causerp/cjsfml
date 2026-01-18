@@ -193,11 +193,11 @@ public class RenderWindow <: RenderTarget & SFMLWindow & Equatable<RenderWindow>
 
     // Equatable
 
-    public override operator func ==(right: RenderWindow): Bool {
+    public operator override func ==(right: RenderWindow): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public override operator func !=(right: RenderWindow): Bool {
+    public operator override func !=(right: RenderWindow): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

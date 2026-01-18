@@ -92,11 +92,11 @@ public class VertexBuffer <: ResourceHandle & RenderTargetDrawable & Equatable<V
 
     // Equatable
 
-    public override operator func ==(right: VertexBuffer): Bool {
+    public operator override func ==(right: VertexBuffer): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public override operator func !=(right: VertexBuffer): Bool {
+    public operator override func !=(right: VertexBuffer): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

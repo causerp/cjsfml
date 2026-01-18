@@ -92,11 +92,11 @@ public class VertexArray <: ResourceHandle & RenderTargetDrawable & Equatable<Ve
 
     // Equatable
 
-    public override operator func ==(right: VertexArray): Bool {
+    public operator override func ==(right: VertexArray): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public override operator func !=(right: VertexArray): Bool {
+    public operator override func !=(right: VertexArray): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

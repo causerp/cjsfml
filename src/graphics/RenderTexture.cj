@@ -136,11 +136,11 @@ public class RenderTexture <: ResourceHandle & RenderTarget & Equatable<RenderTe
 
     // Equatable
 
-    public override operator func ==(right: RenderTexture): Bool {
+    public operator override func ==(right: RenderTexture): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public override operator func !=(right: RenderTexture): Bool {
+    public operator override func !=(right: RenderTexture): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

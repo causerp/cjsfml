@@ -220,11 +220,11 @@ public class Shader <: ResourceHandle & Equatable<Shader> {
 
     // Equatable
 
-    public override operator func ==(right: Shader): Bool {
+    public operator override func ==(right: Shader): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public override operator func !=(right: Shader): Bool {
+    public operator override func !=(right: Shader): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

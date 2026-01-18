@@ -117,11 +117,11 @@ public class SoundBuffer <: ResourceHandle & Equatable<SoundBuffer> {
 
     // Equatable
 
-    public override operator func ==(right: SoundBuffer): Bool {
+    public operator override func ==(right: SoundBuffer): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public override operator func !=(right: SoundBuffer): Bool {
+    public operator override func !=(right: SoundBuffer): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 

@@ -131,11 +131,11 @@ public class ConvexShape <: ResourceHandle & RenderTargetDrawable & Transformabl
 
     // Equatable
 
-    public override operator func ==(right: ConvexShape): Bool {
+    public operator override func ==(right: ConvexShape): Bool {
         m_handle.toUIntNative() == right.m_handle.toUIntNative()
     }
 
-    public override operator func !=(right: ConvexShape): Bool {
+    public operator override func !=(right: ConvexShape): Bool {
         m_handle.toUIntNative() != right.m_handle.toUIntNative()
     }
 
