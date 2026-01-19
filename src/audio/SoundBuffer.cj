@@ -16,8 +16,6 @@ foreign {
 
     func sfSoundBuffer_destroy(handle: CPointer<Unit>): Unit
 
-    // SoundBuffer
-
     func sfSoundBuffer_saveToFile(handle: CPointer<Unit>, filename: CString): Bool
 
     func sfSoundBuffer_getSamples(handle: CPointer<Unit>): CPointer<Int16>
@@ -27,6 +25,8 @@ foreign {
     func sfSoundBuffer_getSampleRate(handle: CPointer<Unit>): UInt32
 
     func sfSoundBuffer_getChannelCount(handle: CPointer<Unit>): UInt32
+
+    func sfSoundBuffer_getChannelMap(handle: CPointer<Unit>, count: CPointer<UIntNative>): CPointer<SoundChannel>
 
     func sfSoundBuffer_getDuration(handle: CPointer<Unit>): Time
 }
@@ -63,6 +63,48 @@ public class SoundBuffer <: ResourceHandle & Equatable<SoundBuffer> {
         unsafe {
             var stream2 = stream.stream
             m_handle = sfSoundBuffer_createFromStream(inout stream2)
+        }
+        if (m_handle.isNull()) {
+            throw SFMLNullHandleException()
+        }
+        m_isOwner = true
+    }
+
+    public init(samples!: Array<Int16>, sampleCount!: UInt64, channelCount!: UInt32, sampleRate!: UInt32,
+        channelMap!: Array<SoundChannel>) {
+        unsafe {
+            let rawSamples = acquireArrayRawData(samples)
+            let rawChannelMap = acquireArrayRawData(channelMap)
+            m_handle = sfSoundBuffer_createFromSamples(
+                rawSamples.pointer,
+                sampleCount,
+                channelCount,
+                sampleRate,
+                rawChannelMap.pointer,
+                UIntNative(rawChannelMap.array.size)
+            )
+            releaseArrayRawData(rawChannelMap)
+            releaseArrayRawData(rawSamples)
+        }
+        if (m_handle.isNull()) {
+            throw SFMLNullHandleException()
+        }
+        m_isOwner = true
+    }
+
+    public init(samples!: CPointer<Int16>, sampleCount!: UInt64, channelCount!: UInt32, sampleRate!: UInt32,
+        channelMap!: Array<SoundChannel>) {
+        unsafe {
+            let rawChannelMap = acquireArrayRawData(channelMap)
+            m_handle = sfSoundBuffer_createFromSamples(
+                samples,
+                sampleCount,
+                channelCount,
+                sampleRate,
+                rawChannelMap.pointer,
+                UIntNative(rawChannelMap.array.size)
+            )
+            releaseArrayRawData(rawChannelMap)
         }
         if (m_handle.isNull()) {
             throw SFMLNullHandleException()
@@ -157,6 +199,19 @@ public class SoundBuffer <: ResourceHandle & Equatable<SoundBuffer> {
     public prop channelCount: UInt32 {
         get() {
             unsafe { sfSoundBuffer_getChannelCount(m_handle) }
+        }
+    }
+
+    public prop channelMap: Array<SoundChannel> {
+        get() {
+            var channelCount: UIntNative = 0
+            let channelsPtr = unsafe { sfSoundBuffer_getChannelMap(m_handle, inout channelCount) }
+            if (channelCount == 0 || channelCount > 255) {
+                return []
+            }
+            return Array<SoundChannel>(Int64(channelCount), {
+                i => unsafe { channelsPtr.read(i) }
+            })
         }
     }
 

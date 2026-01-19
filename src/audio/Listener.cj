@@ -2,15 +2,6 @@ package cjsfml.audio
 
 import cjsfml.system.*
 
-@C
-public struct ListenerCone {
-    public const ListenerCone(
-        public var innerAngle!: Float32 = 0.0, // Inner angle, in degrees
-        public var outerAngle!: Float32 = 0.0, // Outer angle, in degrees
-        public var outerGain!: Float32 = 0.0 // Outer gain
-    ) {}
-}
-
 foreign {
     func sfListener_setGlobalVolume(volume: Float32): Unit
 
