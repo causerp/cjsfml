@@ -12,9 +12,9 @@
   package-configuration = {}
 
 [dependencies]
-  cenum = { git = "https://github.com/causerp/cenum.git", tag = "v1.1.0"}
-  ctemplate = { git = "https://github.com/causerp/ctemplate.git", tag = "v1.1.0"}
-  endian = { git = "https://github.com/causerp/endian.git", tag = "v1.1.0"}
+  cenum = { git = "https://github.com/causerp/cenum.git", tag = "v1.1.1"}
+  ctemplate = { git = "https://github.com/causerp/ctemplate.git", tag = "v1.1.1"}
+  endian = { git = "https://github.com/causerp/endian.git", tag = "v1.1.1"}
 
 [ffi.c]
   csfml-audio = { path = "./csfml" }

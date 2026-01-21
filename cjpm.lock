@@ -1,6 +1,6 @@
 version = 0
 
 [requires]
-  cenum = {commitId = "f0d186d3d428486aea71e47cd394ba066013670e", git = "https://github.com/causerp/cenum.git", tag = "v1.1.0"}
-  ctemplate = {commitId = "23ee677fdd9aa96d1a19687ec02ac767b36757d6", git = "https://github.com/causerp/ctemplate.git", tag = "v1.1.0"}
-  endian = {commitId = "614300d93d9ecac35f64d4d81dd89138627c56dd", git = "https://github.com/causerp/endian.git", tag = "v1.1.0"}
+  cenum = {commitId = "eddfd29a743fca8059576145dbbeac3931d11741", git = "https://github.com/causerp/cenum.git", tag = "v1.1.1"}
+  ctemplate = {commitId = "8a5f688f2aa9d0d79ff67095acf2e8a01975ac02", git = "https://github.com/causerp/ctemplate.git", tag = "v1.1.1"}
+  endian = {commitId = "51e4bb4a9828c5dd1c316a508709ec605304bcb3", git = "https://github.com/causerp/endian.git", tag = "v1.1.1"}
