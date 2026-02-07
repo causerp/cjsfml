@@ -3,4 +3,4 @@ version = 0
 [requires]
   cenum = {commitId = "eddfd29a743fca8059576145dbbeac3931d11741", git = "https://github.com/causerp/cenum.git", tag = "v1.1.1"}
   ctemplate = {commitId = "8a5f688f2aa9d0d79ff67095acf2e8a01975ac02", git = "https://github.com/causerp/ctemplate.git", tag = "v1.1.1"}
-  endian = {commitId = "51e4bb4a9828c5dd1c316a508709ec605304bcb3", git = "https://github.com/causerp/endian.git", tag = "v1.1.1"}
+  endian = {commitId = "16e3677b9aa5a335960a1cace4f6f13517c08d6f", git = "https://github.com/causerp/endian.git", tag = "v1.2.0"}

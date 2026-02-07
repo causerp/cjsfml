@@ -456,32 +456,31 @@ public enum Event <: Equatable<Event> & Hashable {
     | EvtUnknown
 
     public static func create(eventData: Array<Byte>): Event {
-        match (EventType(@ReadEndian[Int32](eventData[0..4]))) {
-            case e where e == EventType.Closed => EvtClosed
-            case e where e == EventType.Resized => EvtResized(SizeEvent(eventData))
-            case e where e == EventType.FocusLost => EvtFocusLost
-            case e where e == EventType.FocusGained => EvtFocusGained
-            case e where e == EventType.TextEntered => EvtTextEntered(TextEvent(eventData))
-            case e where e == EventType.KeyPressed => EvtKeyPressed(KeyEvent(eventData))
-            case e where e == EventType.KeyReleased => EvtKeyReleased(KeyEvent(eventData))
-            case e where e == EventType.MouseWheelScrolled => EvtMouseWheelScrolled(MouseWheelScrollEvent(eventData))
-            case e where e == EventType.MouseButtonPressed => EvtMouseButtonPressed(MouseButtonEvent(eventData))
-            case e where e == EventType.MouseButtonReleased => EvtMouseButtonReleased(MouseButtonEvent(eventData))
-            case e where e == EventType.MouseMoved => EvtMouseMoved(MouseMoveEvent(eventData))
-            case e where e == EventType.MouseMovedRaw => EvtMouseMovedRaw(MouseMoveEventRaw(eventData))
-            case e where e == EventType.MouseEntered => EvtMouseEntered
-            case e where e == EventType.MouseLeft => EvtMouseLeft
-            case e where e == EventType.JoystickButtonPressed => EvtJoystickButtonPressed(
-                JoystickButtonEvent(eventData))
-            case e where e == EventType.JoystickButtonReleased => EvtJoystickButtonReleased(
-                JoystickButtonEvent(eventData))
-            case e where e == EventType.JoystickMoved => EvtJoystickMoved(JoystickMoveEvent(eventData))
-            case e where e == EventType.JoystickConnected => EvtJoystickConnected(JoystickConnectEvent(eventData))
-            case e where e == EventType.JoystickDisconnected => EvtJoystickDisconnected(JoystickConnectEvent(eventData))
-            case e where e == EventType.TouchBegan => EvtTouchBegan(TouchEvent(eventData))
-            case e where e == EventType.TouchMoved => EvtTouchMoved(TouchEvent(eventData))
-            case e where e == EventType.TouchEnded => EvtTouchEnded(TouchEvent(eventData))
-            case e where e == EventType.SensorChanged => EvtSensorChanged(SensorEvent(eventData))
+        let evt = EventType(@ReadEndian[Int32](eventData[0..4]))
+        match {
+            case evt == EventType.Closed => EvtClosed
+            case evt == EventType.Resized => EvtResized(SizeEvent(eventData))
+            case evt == EventType.FocusLost => EvtFocusLost
+            case evt == EventType.FocusGained => EvtFocusGained
+            case evt == EventType.TextEntered => EvtTextEntered(TextEvent(eventData))
+            case evt == EventType.KeyPressed => EvtKeyPressed(KeyEvent(eventData))
+            case evt == EventType.KeyReleased => EvtKeyReleased(KeyEvent(eventData))
+            case evt == EventType.MouseWheelScrolled => EvtMouseWheelScrolled(MouseWheelScrollEvent(eventData))
+            case evt == EventType.MouseButtonPressed => EvtMouseButtonPressed(MouseButtonEvent(eventData))
+            case evt == EventType.MouseButtonReleased => EvtMouseButtonReleased(MouseButtonEvent(eventData))
+            case evt == EventType.MouseMoved => EvtMouseMoved(MouseMoveEvent(eventData))
+            case evt == EventType.MouseMovedRaw => EvtMouseMovedRaw(MouseMoveEventRaw(eventData))
+            case evt == EventType.MouseEntered => EvtMouseEntered
+            case evt == EventType.MouseLeft => EvtMouseLeft
+            case evt == EventType.JoystickButtonPressed => EvtJoystickButtonPressed(JoystickButtonEvent(eventData))
+            case evt == EventType.JoystickButtonReleased => EvtJoystickButtonReleased(JoystickButtonEvent(eventData))
+            case evt == EventType.JoystickMoved => EvtJoystickMoved(JoystickMoveEvent(eventData))
+            case evt == EventType.JoystickConnected => EvtJoystickConnected(JoystickConnectEvent(eventData))
+            case evt == EventType.JoystickDisconnected => EvtJoystickDisconnected(JoystickConnectEvent(eventData))
+            case evt == EventType.TouchBegan => EvtTouchBegan(TouchEvent(eventData))
+            case evt == EventType.TouchMoved => EvtTouchMoved(TouchEvent(eventData))
+            case evt == EventType.TouchEnded => EvtTouchEnded(TouchEvent(eventData))
+            case evt == EventType.SensorChanged => EvtSensorChanged(SensorEvent(eventData))
             case _ => EvtUnknown
         }
     }
