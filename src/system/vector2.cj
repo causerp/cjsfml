@@ -105,7 +105,7 @@ public struct ClassName {
      *
      * @return `true` if `left` is equal to `right`
      */
-    public operator const func ==(right: ClassName): Bool {
+    public const operator func ==(right: ClassName): Bool {
         return x == right.x && y == right.y
     }
 
@@ -119,7 +119,7 @@ public struct ClassName {
      *
      * @return `true` if `left` is not equal to `right`
      */
-    public operator const func !=(right: ClassName): Bool {
+    public const operator func !=(right: ClassName): Bool {
         return x != right.x || y != right.y
     }
 
@@ -133,7 +133,7 @@ public struct ClassName {
      *
      * @return `true` if `left` is equal to `right`
      */
-    public operator const func ==(right: (NumType, NumType)): Bool {
+    public const operator func ==(right: (NumType, NumType)): Bool {
         return x == right[0] && y == right[1]
     }
 
@@ -147,7 +147,7 @@ public struct ClassName {
      *
      * @return `true` if `left` is not equal to `right`
      */
-    public operator const func !=(right: (NumType, NumType)): Bool {
+    public const operator func !=(right: (NumType, NumType)): Bool {
         return x != right[0] || y != right[1]
     }
 
@@ -158,7 +158,7 @@ public struct ClassName {
      *
      * @return Member-wise opposite of the vector
      */
-    public operator const func -(): ClassName {
+    public const operator func -(): ClassName {
         return ClassName(-x, -y)
     }
 
@@ -170,7 +170,7 @@ public struct ClassName {
      *
      * @return Member-wise addition of both vectors
      */
-    public operator const func +(right: ClassName): ClassName {
+    public const operator func +(right: ClassName): ClassName {
         return ClassName(x + right.x, y + right.y)
     }
 
@@ -182,7 +182,7 @@ public struct ClassName {
      *
      * @return Member-wise subtraction of both vectors
      */
-    public operator const func -(right: ClassName): ClassName {
+    public const operator func -(right: ClassName): ClassName {
         return ClassName(x - right.x, y - right.y)
     }
 
@@ -194,7 +194,7 @@ public struct ClassName {
      *
      * @return Member-wise addition of the vector and tuple
      */
-    public operator const func +(right: (NumType, NumType)): ClassName {
+    public const operator func +(right: (NumType, NumType)): ClassName {
         return ClassName(x + right[0], y + right[1])
     }
 
@@ -206,7 +206,7 @@ public struct ClassName {
      *
      * @return Member-wise subtraction of the tuple from the vector
      */
-    public operator const func -(right: (NumType, NumType)): ClassName {
+    public const operator func -(right: (NumType, NumType)): ClassName {
         return ClassName(x - right[0], y - right[1])
     }
 
@@ -218,7 +218,7 @@ public struct ClassName {
      *
      * @return Member-wise multiplication by `right`
      */
-    public operator const func *(right: NumType): ClassName {
+    public const operator func *(right: NumType): ClassName {
         return ClassName(x * right, y * right)
     }
 
@@ -230,7 +230,7 @@ public struct ClassName {
      *
      * @return Member-wise division by `right`
      */
-    public operator const func /(right: NumType): ClassName {
+    public const operator func /(right: NumType): ClassName {
         return ClassName(x / right, y / right)
     }
 

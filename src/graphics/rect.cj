@@ -185,19 +185,19 @@ public struct ClassName {
         return None
     }
 
-    public operator const func ==(right: ClassName): Bool {
+    public const operator func ==(right: ClassName): Bool {
         return position == right.position && size == right.size
     }
 
-    public operator const func !=(right: ClassName): Bool {
+    public const operator func !=(right: ClassName): Bool {
         return position != right.position || size != right.size
     }
 
-    public operator const func ==(right: (NumType, NumType, NumType, NumType)): Bool {
+    public const operator func ==(right: (NumType, NumType, NumType, NumType)): Bool {
         return position.x == right[0] && position.y == right[1] && size.x == right[2] && size.y == right[3]
     }
 
-    public operator const func !=(right: (NumType, NumType, NumType, NumType)): Bool {
+    public const operator func !=(right: (NumType, NumType, NumType, NumType)): Bool {
         return position.x != right[0] || position.y != right[1] || size.x != right[2] || size.y != right[3]
     }
 

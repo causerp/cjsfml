@@ -1,4 +1,4 @@
-name: build
+name: CI
 
 on: [push, pull_request]
 
@@ -6,13 +6,7 @@ jobs:
   build:
     name: Build on ${{ matrix.os }} with Cangjie ${{ matrix.cangjie_version }}
     runs-on: ${{ matrix.os }}
-
     strategy:
-      # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations.
-      # Consider changing this to true when your workflow is stable.
-      fail-fast: false
-
-      # Set up a matrix to run the following configurations:
       matrix:
         include:
           - preset: linux-release
@@ -29,12 +23,8 @@ jobs:
             triplet: x64-mingw-dynamic
 
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Install CMake
-        uses: lukka/get-cmake@latest
-        with:
-          cmakeVersion: "3.31.5"
+      - name: Checkout
+        uses: actions/checkout@v6
 
       - name: Install CSFML dependencies (Linux)
         if: runner.os == 'Linux'
@@ -57,11 +47,8 @@ jobs:
           gcc --version
           g++ --version
 
-      - name: Setup Ninja
-        uses: turtlesec-no/get-ninja@main
-
       - name: Setup Cangjie
-        uses: Zxilly/setup-cangjie@d932a790bbb53ff47ead0609829d91a1e831a440
+        uses: Zxilly/setup-cangjie@v2.1.1
         with:
           channel: lts
           version: ${{ matrix.cangjie_version }}
